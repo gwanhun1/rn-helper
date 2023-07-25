@@ -1,14 +1,24 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './screens/HomeScreen';
-import DetailScreen from './screens/DetailScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Logs from './src/pages/Logs';
+import Worry from './src/pages/Worry';
+import Home from './src/pages/Home';
+import Credit from './src/pages/Credit';
+import User from './src/pages/User';
 
-const Stack = createStackNavigator();
+export const BottomTabs = () => {
+  const Tab = createBottomTabNavigator();
 
-export function AppNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Detail" component={DetailScreen} />
-    </Stack.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Tab.Screen name="로그" component={Logs} />
+      <Tab.Screen name="조언" component={Worry} />
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="결제" component={Credit} />
+      <Tab.Screen name="마이페이지" component={User} />
+    </Tab.Navigator>
   );
-}
+};

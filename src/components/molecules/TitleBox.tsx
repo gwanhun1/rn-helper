@@ -43,7 +43,7 @@ export default TitleBox;
 
 type TitleBoxProps = {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   color?: string;
   size?: number;
 };

@@ -1,14 +1,37 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Logs from './src/pages/Logs';
 import Worry from './src/pages/Worry';
 import Home from './src/pages/Home';
 import Credit from './src/pages/Credit';
 import User from './src/pages/User';
-import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import One from './src/components/pages/step/One';
+import Two from './src/components/pages/step/Two';
+import Three from './src/components/pages/step/Three';
+import Four from './src/components/pages/step/Four';
+import Five from './src/components/pages/step/Five';
 
 export const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
+  const Stack = createStackNavigator();
+
+  const WorryStack = () => {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="WorryHome" component={Worry} />
+        <Stack.Screen name="WorryStep1" component={One} />
+        <Stack.Screen name="WorryStep2" component={Two} />
+        <Stack.Screen name="WorryStep3" component={Three} />
+        <Stack.Screen name="WorryStep4" component={Four} />
+        <Stack.Screen name="WorryStep5" component={Five} />
+      </Stack.Navigator>
+    );
+  };
 
   return (
     <Tab.Navigator
@@ -43,7 +66,7 @@ export const BottomTabs = () => {
       })}
     >
       <Tab.Screen name="로그" component={Logs} />
-      <Tab.Screen name="조언" component={Worry} />
+      <Tab.Screen name="조언" component={WorryStack} />
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="결제" component={Credit} />
       <Tab.Screen name="마이페이지" component={User} />

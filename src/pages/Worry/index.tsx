@@ -1,12 +1,7 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import WorryContents from '../../components/pages/WorryContents';
 
 const Worry = () => {
-  return (
-    <View>
-      <Text>Worry</Text>
-    </View>
-  );
+  return <WorryContents />;
 };
 
 export default Worry;

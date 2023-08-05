@@ -4,29 +4,26 @@ import { styled } from 'styled-components';
 import Center from '../atoms/Center';
 import TitleBox from '../molecules/TitleBox';
 
-const SafeAreaView = styled(SafeAreaViewDefault)`
-  background-color: #50b196;
+const SafeAreaView = styled(SafeAreaViewDefault)<{ fontSize?: number }>`
   padding-bottom: 0;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
 `;
 
-const SafeAreaViews = ({ title, subTitle, color }: SafeAreaViewsProps) => {
+const SafeAreaViewTitle = ({ title, color, size }: SafeAreaViewTitleProps) => {
   return (
     <SafeAreaView>
       <Center>
-        {subTitle && (
-          <TitleBox title={title} subTitle={subTitle} color={color} />
-        )}
+        <TitleBox title={title} color={color} size={size} />
       </Center>
     </SafeAreaView>
   );
 };
 
-export default SafeAreaViews;
+export default SafeAreaViewTitle;
 
-type SafeAreaViewsProps = {
+type SafeAreaViewTitleProps = {
   title: string;
-  subTitle?: string;
   color?: string;
+  size?: number;
 };

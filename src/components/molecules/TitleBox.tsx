@@ -1,7 +1,8 @@
 import React from 'react';
 import { styled } from 'styled-components';
-import { Text as TextDefault } from 'react-native';
+import { Text as TextDefault, View } from 'react-native';
 import { Flex } from '@react-native-material/core';
+import Center from '../atoms/Center';
 
 const Title = styled(TextDefault)<{ color?: string; size?: number }>`
   font-size: ${(props) => (props.size ? `${props.size}px` : '30px')};
@@ -14,7 +15,12 @@ const SubTitle = styled(TextDefault)<{ color?: string }>`
   font-size: 12px;
   margin-top: 30px;
   color: ${(props) => (props.color ? props.color : '#232D3D')};
-  opacity: 0.5;
+  opacity: 0.9;
+`;
+const TextBox = styled(View)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TitleBox = ({ title, subTitle, color, size }: TitleBoxProps) => {
@@ -26,7 +32,9 @@ const TitleBox = ({ title, subTitle, color, size }: TitleBoxProps) => {
             <Title color={color} size={size}>
               {title}
             </Title>
-            <SubTitle color={color}>{subTitle}</SubTitle>
+            <TextBox>
+              <SubTitle color={color}>{subTitle}</SubTitle>
+            </TextBox>
           </>
         ) : (
           <>

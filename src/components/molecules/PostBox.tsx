@@ -3,6 +3,7 @@ import {
   Text,
   Image,
   ImageSourcePropType,
+  View,
 } from 'react-native';
 import React from 'react';
 import Center from '../atoms/Center';
@@ -30,11 +31,9 @@ const SubText = styled(Text)`
   width: 50px;
 `;
 
-const MainText = styled(Text)`
-  color: #232d3d;
+const AccordionBox = styled(View)`
   width: 70%;
 `;
-
 const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
   const images: ImagesMap = {
     gold: require('../../../assets/gold.png'),
@@ -42,15 +41,19 @@ const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
     bronze: require('../../../assets/bronze.png'),
   };
 
-  const imageSource = images[icon] || null;
+  const imageSource = (icon && images[icon]) || null;
   return (
     <Center>
       <Flex>
         {imageSource && <StyledImage source={imageSource} />}
-        <Accordion title={post} content="11111" />
-        <SubText ellipsizeMode="tail" numberOfLines={1}>
-          {username}
-        </SubText>
+        <AccordionBox>
+          <Accordion title={post} content="11111" />
+        </AccordionBox>
+        {username && (
+          <SubText ellipsizeMode="tail" numberOfLines={1}>
+            {username}
+          </SubText>
+        )}
       </Flex>
     </Center>
   );
@@ -59,8 +62,8 @@ const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
 export default PostBox;
 
 type PostBoxProps = {
-  icon: string;
-  username: string;
+  icon?: string;
+  username?: string;
   post: string;
   content: string;
 };

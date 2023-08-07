@@ -1,9 +1,9 @@
 import { View, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { styled } from 'styled-components';
-import { useNavigation } from '@react-navigation/native';
 import SafeAreaViewTitle from '../../organism/SafeAreaViewTitle';
 import Button from '../../atoms/Button';
+import UseNavigate from '../../../hooks/useNavigate';
 
 const Form = styled(View)`
   width: 100%;
@@ -25,15 +25,7 @@ const FormBox = styled(View)`
 `;
 
 const One = () => {
-  const navigation = useNavigation();
-
-  const MoveStep = () => {
-    navigation.navigate('WorryStep2' as never);
-  };
-
-  const MoveBack = () => {
-    navigation.goBack();
-  };
+  const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep2' });
 
   return (
     <FormBox>

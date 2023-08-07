@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -11,6 +10,7 @@ import { Shadow } from 'react-native-shadow-2';
 import { styled } from 'styled-components';
 import Button from '../../atoms/Button';
 import SafeAreaViewTitle from '../../organism/SafeAreaViewTitle';
+import UseNavigate from '../../../hooks/useNavigate';
 
 const Container = styled(View)`
   flex: 1;
@@ -47,15 +47,7 @@ const Boxes = styled(View)`
 `;
 
 const Three = () => {
-  const navigation = useNavigation();
-
-  const MoveStep = () => {
-    navigation.navigate('WorryStep4' as never);
-  };
-
-  const MoveBack = () => {
-    navigation.goBack();
-  };
+  const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep4' });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

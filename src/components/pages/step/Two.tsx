@@ -1,8 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
 import SafeAreaViewTitle from '../../organism/SafeAreaViewTitle';
 import Button from '../../atoms/Button';
 import { ScrollView, View } from 'react-native';
 import { styled } from 'styled-components';
+import UseNavigate from '../../../hooks/useNavigate';
 
 const FormBox = styled(View)`
   margin-bottom: 200px;
@@ -22,16 +22,19 @@ const Box = styled(View)`
   align-items: center;
   padding: 5px;
 `;
+const BigBox = styled(View)`
+  flex: 2;
+  flex-direction: 'row';
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+`;
 
 const Two = () => {
-  const navigation = useNavigation();
+  const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep3' });
 
-  const MoveStep = () => {
-    navigation.navigate('WorryStep3' as never);
-  };
-
-  const MoveBack = () => {
-    navigation.goBack();
+  const BtnClick = (e: any) => {
+    console.log(1);
   };
 
   return (
@@ -43,14 +46,14 @@ const Two = () => {
       />
       <ScrollView>
         <Form>
-          <Box>
+          <BigBox>
             <Button
               text={'웃기게'}
               fontSize={20}
               bgColor={'#4abd9d'}
               onPress={MoveStep}
             />
-          </Box>
+          </BigBox>
           <Box>
             <Button
               text={'츤데레'}
@@ -224,3 +227,25 @@ const Two = () => {
 };
 
 export default Two;
+
+const INITDATA = [
+  { id: 0, title: '정신번쩍' },
+  { id: 1, title: '츤데레' },
+  { id: 2, title: '차갑게' },
+  { id: 3, title: '따뜻하게' },
+  { id: 4, title: '서운하게' },
+  { id: 5, title: '공감' },
+  { id: 6, title: '어색' },
+  { id: 7, title: '울면서' },
+  { id: 8, title: '놀리면서' },
+  { id: 9, title: '웃기게' },
+  { id: 10, title: '추앙하며' },
+  { id: 11, title: '재밌게' },
+  { id: 11, title: '투덜' },
+  { id: 11, title: '짜증' },
+  { id: 11, title: '눈물나게' },
+  { id: 11, title: '내 편' },
+  { id: 11, title: '무섭게' },
+  { id: 11, title: '든든하게' },
+  { id: 11, title: '뒤로가기' },
+];

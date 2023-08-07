@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 const Container = styled(View)`
   margin: 10px 0 15px 0;
   border-radius: 2px;
-  width: 70%;
+  width: 100%;
   border-radius: 10px;
   /* background-color: #ffffff90; */
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);

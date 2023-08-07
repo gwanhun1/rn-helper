@@ -1,8 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { styled } from 'styled-components';
 import AllCenter from '../../atoms/AllCenter';
+import UseNavigate from '../../../hooks/useNavigate';
 
 const LoadingText = styled(Text)`
   color: #4abd9d;
@@ -17,30 +17,18 @@ const Four = () => {
     '수수료\n 내는 중 🥺',
     '조합하는 중 😍',
   ];
+  const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep5' });
   useEffect(() => {
     const timer = setTimeout(() => {
       if (textStep === 3) {
-        return setTextStep(0);
       }
-      if (textStep !== 3) {
-        setTextStep((prev) => prev + 1);
-      }
+      setTextStep((prev) => (prev + 1) % 4);
     }, 1000);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [textStep]);
-
-  const navigation = useNavigation();
-
-  const MoveStep = () => {
-    navigation.navigate('WorryStep5' as never);
-  };
-
-  if (textStep === 3) {
-    MoveStep();
-  }
+  }, [textStep, MoveStep]);
 
   return (
     <View>

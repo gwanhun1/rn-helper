@@ -1,12 +1,8 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import CreditContents from '../../components/pages/CreditContents';
 
 const Credit = () => {
-  return (
-    <View>
-      <Text>Credit</Text>
-    </View>
-  );
+  return <CreditContents />;
 };
 
 export default Credit;

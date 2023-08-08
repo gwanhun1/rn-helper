@@ -32,7 +32,7 @@ const SubText = styled(Text)`
 `;
 
 const AccordionBox = styled(View)`
-  width: 70%;
+  width: 120px;
 `;
 const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
   const images: ImagesMap = {
@@ -46,9 +46,7 @@ const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
     <Center>
       <Flex>
         {imageSource && <StyledImage source={imageSource} />}
-        <AccordionBox>
-          <Accordion title={post} content="11111" />
-        </AccordionBox>
+        <Accordion title={'post'} content="11111" width={70} />
         {username && (
           <SubText ellipsizeMode="tail" numberOfLines={1}>
             {username}

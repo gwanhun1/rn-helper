@@ -12,12 +12,13 @@ const Container = styled(View)`
 `;
 
 const EmptyText = styled(Text)`
-  font-size: 24px;
+  font-size: 40;
   font-weight: bold;
+  color: #50b196;
 `;
 
 const FlatListContent = styled(FlatList)<LogItem>`
-  margin-top: 10px;
+  margin-top: 10;
   width: 100%;
 `;
 
@@ -37,7 +38,7 @@ const LogsContents: React.FC = () => {
       />
       <Container>
         {INITDATA.length === 0 ? (
-          <EmptyText>텅</EmptyText>
+          <EmptyText>텅...</EmptyText>
         ) : (
           <FlatListContent<any>
             data={INITDATA}

@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 import Accordion from '../atoms/Accordion';
 import { Flex as FlexDefault } from '@react-native-material/core';
 import PostBox from '../molecules/PostBox';
+import Card from '../atoms/Card';
+import ListItem from '../atoms/ListItem';
 
 type LogItem = {
   id: number;
@@ -17,25 +19,15 @@ const Flex = styled(FlexDefault)`
   align-items: center;
   width: 100%;
   padding: 5px;
-  margin-vertical: 5px;
-  margin-horizontal: 5px;
-  border-radius: 10px;
-  background-color: white;
-  shadow-color: #000;
-  shadow-offset: {
-    width: 1px;
-    height: 1px;
-  }
-  shadow-opacity: 0.05;
-  shadow-radius: 3.14px;
-  elevation: 2;
 `;
 
 const LogsItems: React.FC<{ item: LogItem }> = ({ item }) => {
   return (
-    <Flex>
-      <Accordion title={'post'} content="11111" />
-    </Flex>
+    <ListItem>
+      <Flex>
+        <Accordion title={'post'} content="11111" />
+      </Flex>
+    </ListItem>
   );
 };
 

@@ -1,12 +1,8 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import UserContents from '../../components/pages/UserContents';
 
 const User = () => {
-  return (
-    <View>
-      <Text>User</Text>
-    </View>
-  );
+  return <UserContents />;
 };
 
 export default User;

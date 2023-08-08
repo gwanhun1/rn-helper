@@ -4,7 +4,7 @@ import Collapsible from 'react-native-collapsible';
 import styled from 'styled-components/native';
 import { AntDesign } from '@expo/vector-icons';
 
-const Container = styled(View)`
+const Container = styled(View)<{ width?: number }>`
   margin: 10px 0 15px 0;
   border-radius: 2px;
   width: 100%;
@@ -12,6 +12,7 @@ const Container = styled(View)`
   /* background-color: #ffffff90; */
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   elevation: 3;
+  width: ${(props) => (props.width ? `${props.width}%` : '100%')};
 `;
 
 const Title = styled(Text)`
@@ -42,7 +43,7 @@ const IconBox = styled(View)`
   justify-content: center;
   align-items: center;
 `;
-const Accordion = ({ title, content }: AccordionProps) => {
+const Accordion = ({ title, content, width }: AccordionProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleAccordion = () => {
@@ -50,7 +51,7 @@ const Accordion = ({ title, content }: AccordionProps) => {
   };
 
   return (
-    <Container>
+    <Container width={width}>
       <TouchableOpacityBox onPress={toggleAccordion}>
         <PostBox>
           <Title ellipsizeMode="tail" numberOfLines={1}>
@@ -81,4 +82,5 @@ export default Accordion;
 type AccordionProps = {
   title: string;
   content: string;
+  width?: number;
 };

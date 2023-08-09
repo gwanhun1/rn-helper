@@ -14,7 +14,7 @@ const TouchableOpacityBox = styled(TouchableOpacity)<{ bgColor?: string }>`
 
 const ButtonText = styled(Text)<{ color?: string; fontSize?: number }>`
   color: ${(props) => props.color || '#ffffff'};
-  font-size: ${(props) => props.fontSize || 16}px;
+  font-size: ${(props) => props.fontSize || 16};
   font-weight: bold;
 `;
 

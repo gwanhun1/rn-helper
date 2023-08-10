@@ -12,7 +12,7 @@ const Container = styled(View)`
 
 const CreditText = styled(Text)`
   color: #fff;
-  font-size: 30;
+  font-size: 30px;
   font-weight: bold;
 `;
 

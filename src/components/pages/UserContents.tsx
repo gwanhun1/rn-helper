@@ -54,7 +54,7 @@ const RuleTextUnderline = styled(View)`
   border-bottom-width: 1px;
   border-bottom-color: gray;
   padding-bottom: 3px;
-  margin: 20px 0;
+  margin: 20px 0px;
 `;
 
 const RuleContent = styled(Text)`

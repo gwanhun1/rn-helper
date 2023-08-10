@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 const StyledAnimatedImage = styled(Animated.Image)`
   height: 180px;
-  margin: 30px 0;
+  margin: 30px 0px;
 `;
 
 const Who = () => {

@@ -12,7 +12,7 @@ const Container = styled(View)`
 `;
 
 const EmptyText = styled(Text)`
-  font-size: 40;
+  font-size: 40px;
   font-weight: bold;
   color: #50b196;
 `;

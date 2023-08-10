@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import { AntDesign } from '@expo/vector-icons';
 
 const Container = styled(View)<{ width?: number }>`
-  margin: 10px 0 15px 0;
+  margin: 10px 0px 15px 0px;
   border-radius: 2px;
   width: 100%;
   border-radius: 10px;

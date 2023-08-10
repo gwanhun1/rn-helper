@@ -17,7 +17,7 @@ const Container = styled(View)`
 
 const InfoText = styled(Text)`
   margin-top: 15px;
-  font-size: 20;
+  font-size: 20px;
 `;
 
 const TextBox = styled(View)`
@@ -58,7 +58,7 @@ const RuleTextUnderline = styled(View)`
 `;
 
 const RuleContent = styled(Text)`
-  font-size: 10;
+  font-size: 10px;
   color: gray;
 `;
 

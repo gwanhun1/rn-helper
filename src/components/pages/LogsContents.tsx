@@ -18,7 +18,7 @@ const EmptyText = styled(Text)`
 `;
 
 const FlatListContent = styled(FlatList)<LogItem>`
-  margin-top: 10;
+  margin-top: 10px;
   width: 100%;
 `;
 

@@ -6,7 +6,7 @@ import UseNavigate from '../../../hooks/useNavigate';
 
 const LoadingText = styled(Text)`
   color: #4abd9d;
-  font-size: 50rem;
+  font-size: 50px;
   font-weight: bold;
 `;
 const Four = () => {

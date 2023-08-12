@@ -8,8 +8,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import Button from '../atoms/Button';
 import Badge from '../atoms/Badge';
 import { Flex } from '@react-native-material/core';
-import Accordion from '../atoms/Accordion';
-import ListItem from '../atoms/ListItem';
 
 const Container = styled(View)`
   width: 70%;

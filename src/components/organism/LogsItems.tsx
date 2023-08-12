@@ -21,11 +21,20 @@ const Flex = styled(FlexDefault)`
   padding: 5px;
 `;
 
+const SubText = styled(Text)`
+  color: #232d3d;
+  opacity: 0.5;
+  width: 50px;
+`;
+
 const LogsItems: React.FC<{ item: LogItem }> = ({ item }) => {
   return (
     <ListItem>
       <Flex>
-        <Accordion title={'post'} content="11111" />
+        <Accordion title={'post'} content="11111" width={90} />
+        <SubText ellipsizeMode="tail" numberOfLines={1}>
+          7.18
+        </SubText>
       </Flex>
     </ListItem>
   );

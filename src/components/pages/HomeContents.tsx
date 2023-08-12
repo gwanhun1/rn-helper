@@ -4,15 +4,18 @@ import Blank from '../atoms/BoxNope';
 import { RefreshControl, ScrollView } from 'react-native';
 import AwardBox from '../template/AwardBox';
 import useRefresh from '../../hooks/useRefresh';
+import useGetDate from '../../hooks/useGetDate';
 
 const HomeContents = () => {
   const { refreshing, onRefresh } = useRefresh();
+  const { monthString, weekString } = useGetDate();
+
   return (
     <>
       <SafeAreaViews
         title={'오늘의 조언'}
-        subTitle={'오늘의 조언은 무엇일까요?'}
-        color={'#e2dfdf'}
+        subTitle={'\n 오늘의 조언은 무엇일까요?'}
+        color={'#fff'}
       />
 
       <Blank height={20} />
@@ -27,8 +30,8 @@ const HomeContents = () => {
           />
         }
       >
-        <AwardBox title="주간 " subTitle="7월 4주차" />
-        <AwardBox title="월간 " subTitle="7월" />
+        <AwardBox title="주간 " subTitle={weekString} />
+        <AwardBox title="월간 " subTitle={monthString} />
         <AwardBox title="좋아요 " subTitle="축하합니다" />
       </ScrollView>
     </>

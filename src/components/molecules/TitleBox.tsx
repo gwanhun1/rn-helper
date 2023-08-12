@@ -12,7 +12,7 @@ const Title = styled(TextDefault)<{ color?: string; size?: number }>`
 `;
 
 const SubTitle = styled(TextDefault)<{ color?: string }>`
-  font-size: 12px;
+  font-size: 10px;
   margin-top: 30px;
   color: ${(props) => (props.color ? props.color : '#232D3D')};
   opacity: 0.9;

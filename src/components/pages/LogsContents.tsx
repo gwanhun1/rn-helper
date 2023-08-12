@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet, FlatList, RefreshControl } from 'react-native';
 import styled from 'styled-components/native';
 import LogsItems from '../organism/LogsItems';
 import SafeAreaViews from '../organism/SafeAreaViews';
+import useRefresh from '../../hooks/useRefresh';
 
 const Container = styled(View)`
   justify-content: center;
@@ -18,11 +19,13 @@ const EmptyText = styled(Text)`
 `;
 
 const FlatListContent = styled(FlatList)<LogItem>`
-  margin-top: 10px;
+  margin-top: 5px;
   width: 100%;
 `;
 
 const LogsContents: React.FC = () => {
+  const { refreshing, onRefresh } = useRefresh();
+
   const renderItem: React.FC<{ item: LogItem }> = ({ item }) => {
     return <LogsItems item={item} />;
   };
@@ -31,9 +34,7 @@ const LogsContents: React.FC = () => {
     <>
       <SafeAreaViews
         title={'조언 리스트'}
-        subTitle={
-          '생각도 많고 걱정도 많은 건\n 긍정적인 신호다, 적어도\n  변하려고 노력 중인 증거니깐.'
-        }
+        subTitle={'고민은 새로운 해결책을 \n 탐색하는 첫 걸음입니다.'}
         color={'white'}
       />
       <Container>
@@ -44,6 +45,14 @@ const LogsContents: React.FC = () => {
             data={INITDATA}
             renderItem={renderItem}
             keyExtractor={(item: any) => item.id.toString()}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                tintColor="#50b196"
+                colors={['#50b196']}
+              />
+            }
           />
         )}
       </Container>

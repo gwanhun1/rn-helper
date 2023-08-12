@@ -12,7 +12,7 @@ const BadgeBorder = styled(Flex)<{ color?: string }>`
 
 const BadgeText = styled(Text)<{ color?: string; fontSize?: number }>`
   color: ${(props) => props.color || '#50b196'};
-  font-size: ${(props) => props.fontSize || 16};
+  font-size: ${(props) => props.fontSize || 16}px;
 `;
 
 const Badge = ({ color, fontSize, children }: BadgeProps) => {

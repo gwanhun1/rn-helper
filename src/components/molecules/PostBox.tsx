@@ -31,9 +31,6 @@ const SubText = styled(Text)`
   width: 50px;
 `;
 
-const AccordionBox = styled(View)`
-  width: 120px;
-`;
 const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
   const images: ImagesMap = {
     gold: require('../../../assets/gold.png'),

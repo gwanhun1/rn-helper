@@ -90,12 +90,7 @@ const UserContents = () => {
               />
             </Box>
             <Box>
-              <Button
-                text={'로그아웃'}
-                fontSize={15}
-                bgColor={'#54d2af'}
-                //   onPress={'MoveStep'}
-              />
+              <Button text={'로그아웃'} fontSize={15} bgColor={'#54d2af'} />
             </Box>
           </Form>
 

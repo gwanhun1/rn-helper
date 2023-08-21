@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styled } from 'styled-components';
 import { AntDesign } from '@expo/vector-icons';
-import LoginForm from '../organism/LoginForm';
 import { useNavigation } from '@react-navigation/native';
+import LoginArea from '../organism/LoginArea';
 
 const CenterBox = styled(View)`
   width: 100%;
@@ -24,6 +24,7 @@ const Box = styled(View)`
   width: 40px;
   text-align: center;
 `;
+
 const LoginContents = () => {
   const navigation = useNavigation();
 
@@ -37,17 +38,14 @@ const LoginContents = () => {
           <Box />
           <Text>로그인</Text>
           <Box>
-            <AntDesign
-              name="closecircleo"
-              size={20}
-              color="gray"
-              onPress={handleExit}
-            />
+            <TouchableOpacity onPress={handleExit}>
+              <AntDesign name="closecircleo" size={20} color="gray" />
+            </TouchableOpacity>
           </Box>
         </TopMenu>
       </CenterBox>
 
-      <LoginForm />
+      <LoginArea />
     </SafeAreaView>
   );
 };

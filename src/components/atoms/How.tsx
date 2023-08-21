@@ -10,23 +10,28 @@ const StyledAnimatedImage = styled(Animated.Image)`
 const How = () => {
   const imageSource = require('../../../assets/how.png');
 
+  // Prefetch the image when the component mounts
+  useEffect(() => {
+    Image.prefetch(imageSource);
+  }, []);
+
   const imageWidth = 3700;
   const screenWidth = Dimensions.get('window').width;
 
-  const scrollX = useRef(new Animated.Value(-imageWidth + screenWidth)).current; // 시작 값을 수정
+  const scrollX = useRef(new Animated.Value(-imageWidth + screenWidth)).current;
 
   useEffect(() => {
     const animation = Animated.timing(scrollX, {
-      toValue: 0, // 이미지가 끝까지 이동하도록 설정
-      duration: 20000, // 12초간 애니메이션 진행
+      toValue: 0,
+      duration: 20000,
       useNativeDriver: false,
     });
 
     const loopAnimation = () => {
       Animated.sequence([
         Animated.timing(scrollX, {
-          toValue: -imageWidth + screenWidth, // 이미지 처음으로 이동
-          duration: 0, // 0초 동안 바로 이동
+          toValue: -imageWidth + screenWidth,
+          duration: 0,
           useNativeDriver: false,
         }),
         animation,

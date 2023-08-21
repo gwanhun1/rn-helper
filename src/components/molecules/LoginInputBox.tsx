@@ -75,6 +75,10 @@ const Reset = styled(TouchableOpacity)`
   align-items: center;
 `;
 
+const Box = styled(View)`
+  height: 30px;
+`;
+
 const LoginInputBox = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -113,20 +117,24 @@ const LoginInputBox = () => {
         />
       </TouchableWithoutFeedback>
 
-      <FlexBox>
-        <Reset>
-          <ResetText>아이디 찾기</ResetText>
-        </Reset>
-        <Reset>
-          <ResetText>비밀번호 찾기</ResetText>
-        </Reset>
-      </FlexBox>
+      {false ? (
+        <FlexBox>
+          <Reset>
+            <ResetText>아이디 찾기</ResetText>
+          </Reset>
+          <Reset>
+            <ResetText>비밀번호 찾기</ResetText>
+          </Reset>
+        </FlexBox>
+      ) : (
+        <Box />
+      )}
       <FlexBox>
         <Button>
           <ButtonText
           // onPress={handleLogin}
           >
-            로그인
+            {false ? '로그인' : '회원가입'}
           </ButtonText>
         </Button>
       </FlexBox>

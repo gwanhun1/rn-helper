@@ -31,7 +31,7 @@ const SignUpBox = () => {
   return (
     <SignUp>
       <SignUpButton>
-        <SignUpButtonText>회원가입</SignUpButtonText>
+        <SignUpButtonText>10초만에 간단하게 회원가입</SignUpButtonText>
       </SignUpButton>
     </SignUp>
   );

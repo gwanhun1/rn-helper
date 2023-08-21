@@ -1,11 +1,5 @@
-import {
-  View as ViewDefault,
-  Text,
-  Image,
-  ImageSourcePropType,
-  View,
-} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Image, ImageSourcePropType, Text } from 'react-native';
 import Center from '../atoms/Center';
 import { styled } from 'styled-components';
 import { Flex as FlexDefault } from '@react-native-material/core';
@@ -31,14 +25,24 @@ const SubText = styled(Text)`
   width: 50px;
 `;
 
-const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
-  const images: ImagesMap = {
-    gold: require('../../../assets/gold.png'),
-    silver: require('../../../assets/silver.png'),
-    bronze: require('../../../assets/bronze.png'),
-  };
+const images: ImagesMap = {
+  gold: require('../../../assets/gold.png'),
+  silver: require('../../../assets/silver.png'),
+  bronze: require('../../../assets/bronze.png'),
+};
 
+const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
   const imageSource = (icon && images[icon]) || null;
+
+  useEffect(() => {
+    // Prefetch the image when the component mounts
+    if (imageSource) {
+      // Type assertion to treat it as a string
+      const imageUri = Image.resolveAssetSource(imageSource).uri as string;
+      Image.prefetch(imageUri);
+    }
+  }, [imageSource]);
+
   return (
     <Center>
       <Flex>

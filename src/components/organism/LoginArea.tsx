@@ -1,17 +1,9 @@
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Keyboard,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { View, Text } from 'react-native';
 import React, { useState } from 'react';
 import Center from '../atoms/Center';
 import { styled } from 'styled-components';
-import LoginIcon from '../molecules/LoginIcon';
-import LoginInputBox from '../molecules/LoginInputBox';
-import SignUpBox from '../molecules/SignUpBox';
+import LoginForm from '../molecules/LoginForm';
+import SignupForm from '../molecules/SignupForm';
 
 const LogoBox = styled(View)`
   width: 100%;
@@ -27,20 +19,16 @@ const Logo = styled(Text)`
   color: #50b196;
 `;
 
-const LoginForm = () => {
+const LoginArea = () => {
   return (
     <Center>
       <LogoBox>
         <Logo>HELPER</Logo>
       </LogoBox>
 
-      <LoginInputBox />
-
-      <LoginIcon />
-
-      <SignUpBox />
+      {false ? <LoginForm /> : <SignupForm />}
     </Center>
   );
 };
 
-export default LoginForm;
+export default LoginArea;

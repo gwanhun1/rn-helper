@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { styled } from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { signUp } from '../../recoil/Atom';
 
 const ButtonBox = styled(View)`
   margin-top: 40px;
@@ -18,9 +20,13 @@ const ButtonText = styled(Text)`
 `;
 
 const LoginBox = () => {
+  const [, setIsSignUp] = useRecoilState(signUp);
+  const handleSignMode = () => {
+    setIsSignUp((prev) => !prev);
+  };
   return (
     <ButtonBox>
-      <Button>
+      <Button onPress={handleSignMode}>
         <ButtonText>로그인 하러가기</ButtonText>
       </Button>
     </ButtonBox>

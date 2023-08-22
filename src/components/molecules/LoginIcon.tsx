@@ -32,6 +32,7 @@ const LoginIcon = () => {
       <IconTextBox>
         <IconText>구글/카카오/애플로 HELPER 간단하게 시작하기</IconText>
       </IconTextBox>
+
       <IconBox>
         <TouchableOpacity>
           <Icon source={google} />

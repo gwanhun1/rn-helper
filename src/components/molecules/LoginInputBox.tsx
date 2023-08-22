@@ -10,6 +10,8 @@ import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import app from '../../../firebase';
+import { login, signUp } from '../../recoil/Atom';
+import { useRecoilState } from 'recoil';
 
 const IDInput = styled(TextInput)`
   width: 80%;
@@ -85,20 +87,23 @@ const LoginInputBox = () => {
 
   const auth = getAuth(app);
   const handleLogin = async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        'user@example.com', // 실제 이메일로 대체
-        'password', // 원하는 비밀번호로 대체
-      );
+    // try {
+    //   const userCredential = await createUserWithEmailAndPassword(
+    //     auth,
+    //     'user@example.com', // 실제 이메일로 대체
+    //     'password', // 원하는 비밀번호로 대체
+    //   );
 
-      const user = userCredential.user;
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-    }
+    //   const user = userCredential.user;
+    //   console.log(user);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    setIsLogin((prev) => !prev);
   };
+  const [isSignUp] = useRecoilState(signUp);
 
+  const [, setIsLogin] = useRecoilState(login);
   return (
     <InputBox>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -131,10 +136,8 @@ const LoginInputBox = () => {
       )}
       <FlexBox>
         <Button>
-          <ButtonText
-          // onPress={handleLogin}
-          >
-            {false ? '로그인' : '회원가입'}
+          <ButtonText onPress={handleLogin}>
+            {isSignUp ? '회원가입' : '로그인'}
           </ButtonText>
         </Button>
       </FlexBox>

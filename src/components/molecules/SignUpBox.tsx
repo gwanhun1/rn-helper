@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { styled } from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { signUp } from '../../recoil/Atom';
 
 const SignUp = styled(View)`
   display: flex;
@@ -28,9 +30,15 @@ const SignUpButtonText = styled(Text)`
 `;
 
 const SignUpBox = () => {
+  const [, setIsSignUp] = useRecoilState(signUp);
+
+  const handleSignMode = () => {
+    setIsSignUp((prev) => !prev);
+  };
+
   return (
     <SignUp>
-      <SignUpButton>
+      <SignUpButton onPress={handleSignMode}>
         <SignUpButtonText>10초만에 간단하게 회원가입</SignUpButtonText>
       </SignUpButton>
     </SignUp>

@@ -4,6 +4,8 @@ import Center from '../atoms/Center';
 import { styled } from 'styled-components';
 import LoginForm from '../molecules/LoginForm';
 import SignupForm from '../molecules/SignupForm';
+import { useRecoilState } from 'recoil';
+import { signUp } from '../../recoil/Atom';
 
 const LogoBox = styled(View)`
   width: 100%;
@@ -20,13 +22,15 @@ const Logo = styled(Text)`
 `;
 
 const LoginArea = () => {
+  const [isSignUp] = useRecoilState(signUp);
+
   return (
     <Center>
       <LogoBox>
         <Logo>HELPER</Logo>
       </LogoBox>
 
-      {false ? <LoginForm /> : <SignupForm />}
+      {isSignUp ? <SignupForm /> : <LoginForm />}
     </Center>
   );
 };

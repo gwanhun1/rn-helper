@@ -5,6 +5,8 @@ import { styled } from 'styled-components';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LoginArea from '../organism/LoginArea';
+import { useRecoilState } from 'recoil';
+import { signUp } from '../../recoil/Atom';
 
 const CenterBox = styled(View)`
   width: 100%;
@@ -31,12 +33,15 @@ const LoginContents = () => {
   const handleExit = () => {
     navigation.navigate('Home' as never);
   };
+
+  const [isSignUp] = useRecoilState(signUp);
+
   return (
     <SafeAreaView>
       <CenterBox>
         <TopMenu>
           <Box />
-          <Text>로그인</Text>
+          <Text>{isSignUp ? '회원가입' : '로그인'}</Text>
           <Box>
             <TouchableOpacity onPress={handleExit}>
               <AntDesign name="closecircleo" size={20} color="gray" />

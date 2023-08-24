@@ -17,19 +17,19 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
       </Center>
       <PostBoxes>
         <PostBox
-          icon={'gold'}
+          icon={'Gold'}
           username={'username'}
           post={'post'}
           content={'content'}
         />
         <PostBox
-          icon={'silver'}
+          icon={'Silver'}
           username={'username'}
           post={'post'}
           content={'content'}
         />
         <PostBox
-          icon={'bronze'}
+          icon={'Bronze'}
           username={'username'}
           post={'post'}
           content={'content'}

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { Image, ImageSourcePropType, Text } from 'react-native';
+import { Image, ImageSourcePropType, Text, View } from 'react-native';
 import Center from '../atoms/Center';
 import { styled } from 'styled-components';
 import { Flex as FlexDefault } from '@react-native-material/core';
 import Accordion from '../atoms/Accordion';
+import Silver from '../../../assets/silver.svg';
+import Gold from '../../../assets/gold.svg';
+import Bronze from '../../../assets/bronze.svg';
 
 const Flex = styled(FlexDefault)`
   flex-direction: row;
@@ -25,28 +28,33 @@ const SubText = styled(Text)`
   width: 50px;
 `;
 
-const images: ImagesMap = {
-  gold: require('../../../assets/gold.png'),
-  silver: require('../../../assets/silver.png'),
-  bronze: require('../../../assets/bronze.png'),
-};
+const Box = styled(View)`
+  width: 30px;
+  height: 30px;
+`;
 
 const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
-  const imageSource = (icon && images[icon]) || null;
-
-  useEffect(() => {
-    // Prefetch the image when the component mounts
-    if (imageSource) {
-      // Type assertion to treat it as a string
-      const imageUri = Image.resolveAssetSource(imageSource).uri as string;
-      Image.prefetch(imageUri);
-    }
-  }, [imageSource]);
-
   return (
     <Center>
       <Flex>
-        {imageSource && <StyledImage source={imageSource} />}
+        <Box>
+          {icon === 'Gold' && (
+            <Gold preserveAspectRatio="xMinYMin meet" viewBox="20 70 600 410" />
+          )}
+          {icon === 'Silver' && (
+            <Silver
+              preserveAspectRatio="xMinYMin meet"
+              viewBox="20 70 600 410"
+            />
+          )}
+          {icon === 'Bronze' && (
+            <Bronze
+              preserveAspectRatio="xMinYMin meet"
+              viewBox="20 70 600 410"
+            />
+          )}
+        </Box>
+
         <Accordion title={'post'} content="11111" width={70} />
         {username && (
           <SubText ellipsizeMode="tail" numberOfLines={1}>

@@ -2,19 +2,19 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Center from '../atoms/Center';
 import { styled } from 'styled-components';
+import Google from '../../../assets/google.svg';
+import Kakao from '../../../assets/kakao.svg';
+import Apple from '../../../assets/apple.svg';
+
 
 const IconBox = styled(View)`
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
-  width: 40%;
+  width: 50%;
 `;
 
-const Icon = styled(Image)`
-  width: 30px;
-  height: 30px;
-`;
 const IconTextBox = styled(View)`
   margin: 30px 0px;
 `;
@@ -23,9 +23,6 @@ const IconText = styled(Text)`
 `;
 
 const LoginIcon = () => {
-  const google = require('../../../assets/google.png');
-  const kakao = require('../../../assets/kakao.png');
-  const apple = require('../../../assets/apple.png');
 
   return (
     <Center>
@@ -35,13 +32,13 @@ const LoginIcon = () => {
 
       <IconBox>
         <TouchableOpacity>
-          <Icon source={google} />
+        <Google viewBox="0 0 450 600" width={50} height={50}/>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Icon source={kakao} />
+        <Kakao viewBox="0 0 450 600" width={50} height={50}/>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Icon source={apple} />
+        <Apple viewBox="0 0 450 600" width={50} height={50}/>
         </TouchableOpacity>
       </IconBox>
     </Center>

@@ -4,8 +4,8 @@ import { styled } from 'styled-components';
 import WhoImg from '../../../assets/who.svg'; // Change the image source to the PNG file
 
 
-const Who = () => {
-  const imageWidth =2500;
+const WhoSe = () => {
+  const imageWidth = 2600;
   const screenWidth = Dimensions.get('window').width;
 
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -13,7 +13,7 @@ const Who = () => {
   useEffect(() => {
     const animation = Animated.timing(scrollX, {
       toValue: -imageWidth + screenWidth, // Set the image to go all the way
-      duration: 12000, // animation for 5 seconds
+      duration: 6000, // animation for 5 seconds
       useNativeDriver: false,
     });
 
@@ -46,4 +46,4 @@ const Who = () => {
   );
 };
 
-export default Who;
+export default WhoSe;

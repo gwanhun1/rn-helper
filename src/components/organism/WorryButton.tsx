@@ -5,8 +5,8 @@ import { styled } from 'styled-components';
 import Button from '../atoms/Button';
 
 const Size = styled(View)`
-  width: 200px;
-  height: 80px;
+  width: 250px;
+  height: 100px;
 `;
 
 const WorryForm = styled(View)`
@@ -27,7 +27,7 @@ const WorryButton = () => {
       <Size>
         <Button
           text={'시작하기'}
-          fontSize={30}
+          fontSize={40}
           bgColor={'#54d2af'}
           onPress={MoveStep}
         />

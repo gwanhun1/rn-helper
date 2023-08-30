@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import { Image, Animated, View, Dimensions } from 'react-native';
+import { Animated, View, Dimensions } from 'react-native';
 import { styled } from 'styled-components';
+import HowImg from '../../../assets/how.svg';
 
 const StyledAnimatedImage = styled(Animated.Image)`
   height: 180px;
@@ -8,29 +9,22 @@ const StyledAnimatedImage = styled(Animated.Image)`
 `;
 
 const How = () => {
-  const imageSource = require('../../../assets/how.png');
-
-  // Prefetch the image when the component mounts
-  useEffect(() => {
-    Image.prefetch(imageSource);
-  }, []);
-
-  const imageWidth = 3700;
+  const imageWidth = 3350;
   const screenWidth = Dimensions.get('window').width;
 
-  const scrollX = useRef(new Animated.Value(-imageWidth + screenWidth)).current;
+  const scrollX = useRef(new Animated.Value(-imageWidth + screenWidth)).current; // Set the initial value to start from the left end of the image
 
   useEffect(() => {
     const animation = Animated.timing(scrollX, {
-      toValue: 0,
-      duration: 20000,
+      toValue: 0, // Animate to the right to reveal the entire image
+      duration: 10000,
       useNativeDriver: false,
     });
 
     const loopAnimation = () => {
       Animated.sequence([
         Animated.timing(scrollX, {
-          toValue: -imageWidth + screenWidth,
+          toValue: -imageWidth + screenWidth, // Return to the initial position (left end)
           duration: 0,
           useNativeDriver: false,
         }),
@@ -45,13 +39,14 @@ const How = () => {
 
   return (
     <View style={{ width: screenWidth, overflow: 'hidden' }}>
-      <StyledAnimatedImage
-        source={imageSource}
+      <Animated.View
         style={{
           width: imageWidth,
           transform: [{ translateX: scrollX }],
         }}
-      />
+      >
+        <HowImg />
+      </Animated.View>
     </View>
   );
 };

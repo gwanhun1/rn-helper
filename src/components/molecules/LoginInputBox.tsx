@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import app from '../../../firebase';
 import { login, signUp } from '../../recoil/Atom';
 import { useRecoilState } from 'recoil';
 
@@ -85,7 +83,6 @@ const LoginInputBox = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const auth = getAuth(app);
   const handleLogin = async () => {
     // try {
     //   const userCredential = await createUserWithEmailAndPassword(

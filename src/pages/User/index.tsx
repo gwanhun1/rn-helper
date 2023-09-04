@@ -6,8 +6,8 @@ import { login } from '../../recoil/Atom';
 
 const User = () => {
   const [isLogin, setIsLogin] = useRecoilState(login);
+
   return <>{isLogin ? <UserContents /> : <LoginContents />}</>;
-  // return ( <UserContents /> )
 };
 
 export default User;

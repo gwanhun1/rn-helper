@@ -2,10 +2,12 @@ import React from 'react';
 import Button from '../atoms/Button';
 import { styled } from 'styled-components';
 import { View } from 'react-native';
+import { useRecoilState } from 'recoil';
+import { login } from '../../recoil/Atom';
 
 const Form = styled(View)`
   width: 100%;
-  height: 80px;
+  height: 60px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -20,7 +22,17 @@ const Box = styled(View)`
   padding: 5px;
 `;
 
-const InfoBtn = () => {
+const InfoBtn = ({ setModify }: InfoBtnProps) => {
+  const handleModify = () => {
+    setModify((prev) => !prev);
+  };
+
+  const [isLogin, setIsLogin] = useRecoilState(login);
+
+  const handleSignOut = () => {
+    setIsLogin(false);
+  };
+
   return (
     <Form>
       <Box>
@@ -28,14 +40,23 @@ const InfoBtn = () => {
           text={'회원정보 수정'}
           fontSize={15}
           bgColor={'#54d2af'}
-          //   onPress={'MoveStep'}
+          onPress={handleModify}
         />
       </Box>
       <Box>
-        <Button text={'로그아웃'} fontSize={15} bgColor={'#54d2af'} />
+        <Button
+          text={'로그아웃'}
+          fontSize={15}
+          bgColor={'#54d2af'}
+          onPress={handleSignOut}
+        />
       </Box>
     </Form>
   );
 };
 
 export default InfoBtn;
+
+type InfoBtnProps = {
+  setModify: React.Dispatch<React.SetStateAction<boolean>>;
+};

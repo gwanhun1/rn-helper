@@ -61,7 +61,11 @@ const Three = () => {
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
           <ShadowBox>
-            <TextBox multiline={true} />
+            <TextBox
+              multiline={true}
+              blurOnSubmit={true}
+              placeholder="당신의 이야기를 들려주세요 🙂"
+            />
           </ShadowBox>
         </KeyboardAvoidingContainer>
 

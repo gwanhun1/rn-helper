@@ -1,5 +1,5 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { View, Text, TextInput } from 'react-native';
+import React, { useState } from 'react';
 import Card from '../atoms/Card';
 import { FontAwesome } from '@expo/vector-icons';
 import Badge from '../atoms/Badge';
@@ -7,35 +7,126 @@ import { Flex } from '@react-native-material/core';
 import { styled } from 'styled-components';
 import Center from '../atoms/Center';
 
-const InfoText = styled(Text)`
-  margin-top: 15px;
+const IDInput = styled(TextInput)`
+  width: 230px;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: #fff;
+  padding-left: 10px;
+`;
+
+const PWInput = styled(TextInput)`
+  height: 30px;
+  width: 230px;
+  padding: 0px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding-left: 10px;
+  background-color: #fff;
+`;
+
+const InfoTextName = styled(Text)`
+  margin: 15px;
   font-size: 20px;
+  font-weight: 700;
 `;
 
 const TextBox = styled(View)`
-  margin-top: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 `;
 
-const InfoForm = () => {
+const FlexBox = styled(View)`
+  display: flex;
+  flex-direction: row;
+`;
+
+const UsernameBox = styled(View)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+`;
+
+const IdPw = styled(Text)`
+  width: 100%;
+  margin-left: 20px;
+  margin-top: 10px;
+  color: gray;
+`;
+
+const IdPwBox = styled(View)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-left: 15px;
+`;
+
+const PwCircle = styled(View)`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: gray;
+`;
+
+const InfoForm = ({ modify }: InfoFormProps) => {
+  const [formData, setFormData] = useState({
+    id: '관7602',
+    password: '비밀번호123123',
+  });
+
+  const handleChange = (name: string, value: string) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
   return (
-    <Card>
-      <Center>
-        <FontAwesome name="user-circle" size={120} color="gray" />
-        <TextBox>
-          <Flex direction="row" justify="center" items="center">
-            <InfoText>아이디</InfoText>
-            <Badge color="gray" fontSize={8}>
-              일반회원
-            </Badge>
-          </Flex>
-          <InfoText>이름</InfoText>
-        </TextBox>
-      </Center>
-    </Card>
+    <FlexBox>
+      <FontAwesome name="user-circle" size={120} color="gray" />
+      <TextBox>
+        <UsernameBox>
+          <InfoTextName>정관훈</InfoTextName>
+          <Badge color="gray" fontSize={8}>
+            일반회원
+          </Badge>
+        </UsernameBox>
+        {modify ? (
+          <>
+            <IdPwBox>
+              <IDInput
+                value={formData.id}
+                onChangeText={(value) => handleChange('id', value)}
+              />
+            </IdPwBox>
+            <IdPwBox>
+              <PWInput
+                value={formData.password}
+                onChangeText={(value) => handleChange('password', value)}
+              />
+            </IdPwBox>
+          </>
+        ) : (
+          <>
+            <IdPw>{formData.id}</IdPw>
+
+            <IdPw>
+              {formData.password.split('').map((char, index) => (
+                <PwCircle key={index} />
+              ))}
+            </IdPw>
+          </>
+        )}
+      </TextBox>
+    </FlexBox>
   );
 };
 
 export default InfoForm;
+
+type InfoFormProps = {
+  modify: boolean;
+};

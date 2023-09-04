@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Center from '../atoms/Center';
 import { styled } from 'styled-components';
@@ -8,17 +8,19 @@ import InfoBtn from '../organism/InfoBtn';
 import UserDescription from '../organism/UserDescription';
 
 const Container = styled(View)`
-  width: 70%;
+  width: 90%;
 `;
 
 const UserContents = () => {
+  const [modify, setModify] = useState(false);
+
   return (
     <>
       <SafeAreaView />
       <Center>
         <Container>
-          <InfoForm />
-          <InfoBtn />
+          <InfoForm modify={modify} />
+          <InfoBtn setModify={setModify} />
           <UserDescription />
         </Container>
       </Center>

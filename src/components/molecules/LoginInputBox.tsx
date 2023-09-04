@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { login, signUp } from '../../recoil/Atom';
 import { useRecoilState } from 'recoil';
+import { useNavigation } from '@react-navigation/native';
 
 const IDInput = styled(TextInput)`
   width: 80%;
@@ -80,23 +81,14 @@ const Box = styled(View)`
 `;
 
 const LoginInputBox = () => {
+  const navigation = useNavigation();
+
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    // try {
-    //   const userCredential = await createUserWithEmailAndPassword(
-    //     auth,
-    //     'user@example.com', // 실제 이메일로 대체
-    //     'password', // 원하는 비밀번호로 대체
-    //   );
-
-    //   const user = userCredential.user;
-    //   console.log(user);
-    // } catch (error) {
-    //   console.log(error);
-    // }
     setIsLogin((prev) => !prev);
+    navigation.navigate('Home' as never);
   };
   const [isSignUp] = useRecoilState(signUp);
 
@@ -133,7 +125,9 @@ const LoginInputBox = () => {
       )}
       <FlexBox>
         <Button>
-          <ButtonText onPress={handleLogin}>
+          <ButtonText
+            onPress={isSignUp ? () => console.log('회원가입') : handleLogin}
+          >
             {isSignUp ? '회원가입' : '로그인'}
           </ButtonText>
         </Button>

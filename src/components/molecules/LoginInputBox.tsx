@@ -11,6 +11,8 @@ import { styled } from 'styled-components';
 import { login, signUp } from '../../recoil/Atom';
 import { useRecoilState } from 'recoil';
 import { useNavigation } from '@react-navigation/native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebaseConfig';
 
 const IDInput = styled(TextInput)`
   width: 80%;
@@ -89,10 +91,23 @@ const LoginInputBox = () => {
   const handleLogin = async () => {
     setIsLogin((prev) => !prev);
     navigation.navigate('Home' as never);
+
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        userName,
+        password,
+      );
+
+      console.log(user);
+    } catch (e) {
+      console.log(e);
+    }
   };
   const [isSignUp] = useRecoilState(signUp);
 
   const [, setIsLogin] = useRecoilState(login);
+
   return (
     <InputBox>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

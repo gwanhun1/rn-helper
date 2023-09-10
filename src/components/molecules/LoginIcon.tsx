@@ -6,7 +6,6 @@ import Google from '../../../assets/google.svg';
 import Kakao from '../../../assets/kakao.svg';
 import Apple from '../../../assets/apple.svg';
 
-
 const IconBox = styled(View)`
   display: flex;
   justify-content: space-around;
@@ -23,7 +22,6 @@ const IconText = styled(Text)`
 `;
 
 const LoginIcon = () => {
-
   return (
     <Center>
       <IconTextBox>
@@ -31,7 +29,7 @@ const LoginIcon = () => {
       </IconTextBox>
 
       <IconBox>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
         <Google viewBox="0 0 450 600" width={50} height={50}/>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -39,7 +37,7 @@ const LoginIcon = () => {
         </TouchableOpacity>
         <TouchableOpacity>
         <Apple viewBox="0 0 450 600" width={50} height={50}/>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </IconBox>
     </Center>
   );

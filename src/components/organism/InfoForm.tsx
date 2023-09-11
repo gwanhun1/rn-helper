@@ -1,11 +1,13 @@
 import { View, Text, TextInput } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../atoms/Card';
 import { FontAwesome } from '@expo/vector-icons';
 import Badge from '../atoms/Badge';
 import { Flex } from '@react-native-material/core';
 import { styled } from 'styled-components';
 import Center from '../atoms/Center';
+import { useRecoilState } from 'recoil';
+import { isUser } from '../../recoil/Atom';
 
 const IDInput = styled(TextInput)`
   width: 230px;
@@ -72,8 +74,9 @@ const PwCircle = styled(View)`
 `;
 
 const InfoForm = ({ modify }: InfoFormProps) => {
+  const [user, setUser] = useRecoilState<any>(isUser);
   const [formData, setFormData] = useState({
-    id: '관7602',
+    id: user.email,
     password: '비밀번호123123',
   });
 
@@ -83,6 +86,10 @@ const InfoForm = ({ modify }: InfoFormProps) => {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    setFormData({ id: user.email, password: '123123' });
+  }, [user]);
 
   return (
     <FlexBox>

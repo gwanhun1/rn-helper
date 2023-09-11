@@ -8,10 +8,13 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import { login, signUp } from '../../recoil/Atom';
+import { isUser, login, signUp } from '../../recoil/Atom';
 import { useRecoilState } from 'recoil';
 import { useNavigation } from '@react-navigation/native';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { auth } from '../../../firebaseConfig';
 
 const IDInput = styled(TextInput)`
@@ -84,28 +87,40 @@ const Box = styled(View)`
 
 const LoginInputBox = () => {
   const navigation = useNavigation();
-
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
-    setIsLogin((prev) => !prev);
-    navigation.navigate('Home' as never);
-
+  const handleSignup = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        userName,
+        password,
+      );
+      console.log('Signup success:', userCredential.user);
+      // Add any navigation or success logic here
+    } catch (e) {
+      console.error('Signup error:', e);
+    }
+  };
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         userName,
         password,
       );
 
-      console.log(user);
+      setIsLogin((prev) => !prev);
+      navigation.navigate('Home' as never);
+      setUser(userCredential.user.providerData[0]);
     } catch (e) {
-      console.log(e);
+      console.error('Login error:', e);
     }
   };
   const [isSignUp] = useRecoilState(signUp);
-
+  const [user, setUser] = useRecoilState<any>(isUser);
   const [, setIsLogin] = useRecoilState(login);
 
   return (
@@ -139,12 +154,8 @@ const LoginInputBox = () => {
         <Box />
       )}
       <FlexBox>
-        <Button>
-          <ButtonText
-            onPress={isSignUp ? () => console.log('회원가입') : handleLogin}
-          >
-            {isSignUp ? '회원가입' : '로그인'}
-          </ButtonText>
+        <Button onPress={isSignUp ? handleSignup : handleLogin}>
+          <ButtonText>{isSignUp ? '회원가입' : '로그인'}</ButtonText>
         </Button>
       </FlexBox>
     </InputBox>

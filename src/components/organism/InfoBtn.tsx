@@ -3,7 +3,9 @@ import Button from '../atoms/Button';
 import { styled } from 'styled-components';
 import { View } from 'react-native';
 import { useRecoilState } from 'recoil';
-import { login } from '../../recoil/Atom';
+import { isUser, login } from '../../recoil/Atom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../../firebaseConfig';
 
 const Form = styled(View)`
   width: 100%;
@@ -28,9 +30,19 @@ const InfoBtn = ({ setModify }: InfoBtnProps) => {
   };
 
   const [isLogin, setIsLogin] = useRecoilState(login);
+  const [user, setUser] = useRecoilState<any>(isUser);
 
   const handleSignOut = () => {
     setIsLogin(false);
+    signOut(auth);
+    setUser({
+      displayName: null,
+      email: '',
+      phoneNumber: null,
+      photoURL: null,
+      providerId: '',
+      uid: '',
+    });
   };
 
   return (

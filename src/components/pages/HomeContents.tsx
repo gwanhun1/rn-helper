@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SafeAreaViews from '../organism/SafeAreaViews';
 import Blank from '../atoms/BoxNope';
 import { RefreshControl, ScrollView } from 'react-native';
 import AwardBox from '../template/AwardBox';
 import useRefresh from '../../hooks/useRefresh';
 import useGetDate from '../../hooks/useGetDate';
+import { auth } from '../../../firebaseConfig';
 
 const HomeContents = () => {
   const { refreshing, onRefresh } = useRefresh();
   const { monthString, weekString } = useGetDate();
 
+  useEffect(
+    () =>
+      auth.onAuthStateChanged((user) => {
+        console.log('11111');
+        console.log(user);
+      }),
+    [],
+  );
   return (
     <>
       <SafeAreaViews

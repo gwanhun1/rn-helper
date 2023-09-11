@@ -33,9 +33,7 @@ const BigBox = styled(View)`
 const Two = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep3' });
 
-  const BtnClick = (e: any) => {
-    console.log(1);
-  };
+  const BtnClick = (e: any) => {};
 
   return (
     <FormBox>

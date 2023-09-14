@@ -13,11 +13,9 @@ export const signUp = atom({
 export const isUser = atom({
   key: 'user',
   default: {
-    displayName: null,
-    email: '',
-    phoneNumber: null,
-    photoURL: null,
-    providerId: '',
-    uid: '',
+    id: '',
+    username: '',
+    password: '',
+    grade: '',
   },
 });

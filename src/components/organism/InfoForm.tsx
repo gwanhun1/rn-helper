@@ -8,19 +8,33 @@ import { styled } from 'styled-components';
 import Center from '../atoms/Center';
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
+import { get, getDatabase, ref } from 'firebase/database';
+import app from '../../../firebaseConfig';
+import { UserInfo } from '../pages/UserContents';
 
 const IDInput = styled(TextInput)`
-  width: 230px;
-  height: 30px;
+  width: 70%;
+  height: 40px;
   border: 1px solid lightgray;
   border-radius: 5px;
   background-color: #fff;
   padding-left: 10px;
 `;
 
+const UserInput = styled(TextInput)`
+  height: 45px;
+  width: 50%;
+  font-size: 20px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: #fff;
+  padding-left: 10px;
+  margin-left: 15px;
+`;
+
 const PWInput = styled(TextInput)`
   height: 30px;
-  width: 230px;
+  width: 70%;
   padding: 0px;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -36,7 +50,6 @@ const InfoTextName = styled(Text)`
 
 const TextBox = styled(View)`
   display: flex;
-  width: 100%;
 `;
 
 const FlexBox = styled(View)`
@@ -52,7 +65,6 @@ const UsernameBox = styled(View)`
 `;
 
 const IdPw = styled(Text)`
-  width: 100%;
   margin-left: 20px;
   margin-top: 10px;
   color: gray;
@@ -62,7 +74,6 @@ const IdPwBox = styled(View)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
   margin-left: 15px;
 `;
 
@@ -73,22 +84,41 @@ const PwCircle = styled(View)`
   background-color: gray;
 `;
 
-const InfoForm = ({ modify }: InfoFormProps) => {
+const NoneUsername = styled(Text)`
+  font-size: 12px;
+  color: gray;
+`;
+
+const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
   const [user, setUser] = useRecoilState<any>(isUser);
-  const [formData, setFormData] = useState({
-    id: user.email,
-    password: '비밀번호123123',
-  });
 
   const handleChange = (name: string, value: string) => {
-    setFormData((prevFormData) => ({
+    setFormData((prevFormData: any) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
 
+  const db = getDatabase(app);
+  const dataRef = ref(db, 'users');
   useEffect(() => {
-    setFormData({ id: user.email, password: '123123' });
+    get(dataRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          setFormData({
+            username: userData.username,
+            id: userData.id,
+            password: userData.password,
+            grade: userData.grade,
+          });
+        } else {
+          console.log('No data available at the "users" location');
+        }
+      })
+      .catch((error) => {
+        console.error('Error getting data from the database', error);
+      });
   }, [user]);
 
   return (
@@ -96,7 +126,20 @@ const InfoForm = ({ modify }: InfoFormProps) => {
       <FontAwesome name="user-circle" size={120} color="gray" />
       <TextBox>
         <UsernameBox>
-          <InfoTextName>정관훈</InfoTextName>
+          {modify ? (
+            <UserInput
+              value={formData.username}
+              onChangeText={(value) => handleChange('username', value)}
+            />
+          ) : (
+            <>
+              {formData.username ? (
+                <InfoTextName>{formData.username}</InfoTextName>
+              ) : (
+                <NoneUsername>닉네임을 입력해주세요.</NoneUsername>
+              )}
+            </>
+          )}
           <Badge color="gray" fontSize={8}>
             일반회원
           </Badge>
@@ -136,4 +179,6 @@ export default InfoForm;
 
 type InfoFormProps = {
   modify: boolean;
+  formData: UserInfo;
+  setFormData: any;
 };

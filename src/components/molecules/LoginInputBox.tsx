@@ -15,7 +15,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { auth } from '../../../firebaseConfig';
+import app, { auth } from '../../../firebaseConfig';
+import { get, getDatabase, ref } from 'firebase/database';
 
 const IDInput = styled(TextInput)`
   width: 80%;
@@ -101,6 +102,7 @@ const LoginInputBox = () => {
       // Add any navigation or success logic here
     } catch (e) {
       console.error('Signup error:', e);
+      alert('회원가입에 실패하셨습니다.');
     }
   };
 
@@ -112,17 +114,39 @@ const LoginInputBox = () => {
         password,
       );
 
-      setIsLogin((prev) => !prev);
+      setIsLogin(true);
       navigation.navigate('Home' as never);
-      setUser(userCredential.user.providerData[0]);
+      SaveInfo();
     } catch (e) {
       console.error('Login error:', e);
+      alert('로그인 정보를 다시 입력해주세요.');
     }
   };
   const [isSignUp] = useRecoilState(signUp);
   const [user, setUser] = useRecoilState<any>(isUser);
   const [, setIsLogin] = useRecoilState(login);
 
+  const SaveInfo = () => {
+    const db = getDatabase(app);
+    const dataRef = ref(db, 'users');
+    get(dataRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          setUser({
+            username: userData.username,
+            id: userData.id,
+            password: userData.password,
+            grade: userData.grade,
+          });
+        } else {
+          console.log('No data available at the "users" location');
+        }
+      })
+      .catch((error) => {
+        console.error('Error getting data from the database', error);
+      });
+  };
   return (
     <InputBox>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

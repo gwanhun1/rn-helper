@@ -21,8 +21,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
           username={'username'}
           post={'post'}
           content={'content'}
-        />
-        <PostBox
+        /> */}
+        {/* <PostBox
           icon={'Silver'}
           username={'username'}
           post={'post'}

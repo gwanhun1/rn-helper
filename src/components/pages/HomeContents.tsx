@@ -5,25 +5,20 @@ import { RefreshControl, ScrollView } from 'react-native';
 import AwardBox from '../template/AwardBox';
 import useRefresh from '../../hooks/useRefresh';
 import useGetDate from '../../hooks/useGetDate';
-import { auth } from '../../../firebaseConfig';
-
+import app from '../../../firebaseConfig';
+import { getDatabase, ref, set } from 'firebase/database';
+import { useRecoilState } from 'recoil';
+import { isUser } from '../../recoil/Atom';
 const HomeContents = () => {
   const { refreshing, onRefresh } = useRefresh();
   const { monthString, weekString } = useGetDate();
-
-  useEffect(
-    () =>
-      auth.onAuthStateChanged((user) => {
-        console.log('11111');
-        console.log(user);
-      }),
-    [],
-  );
+  const [user] = useRecoilState(isUser);
+  console.log(user);
   return (
     <>
       <SafeAreaViews
         title={'오늘의 조언'}
-        subTitle={'\n 오늘의 조언은 무엇일까요?'}
+        subTitle={'오늘의 조언은 무엇일까요?'}
         color={'#fff'}
       />
 

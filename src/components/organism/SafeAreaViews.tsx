@@ -3,6 +3,7 @@ import { SafeAreaView as SafeAreaViewDefault } from 'react-native-safe-area-cont
 import { styled } from 'styled-components';
 import Center from '../atoms/Center';
 import TitleBox from '../molecules/TitleBox';
+import TitleBoxName from '../molecules/TitleBoxName';
 
 const SafeAreaView = styled(SafeAreaViewDefault)`
   background-color: #50b196;
@@ -16,7 +17,7 @@ const SafeAreaViews = ({ title, subTitle, color }: SafeAreaViewsProps) => {
     <SafeAreaView>
       <Center>
         {subTitle && (
-          <TitleBox title={title} subTitle={subTitle} color={color} />
+          <TitleBoxName title={title} subTitle={subTitle} color={color} />
         )}
       </Center>
     </SafeAreaView>

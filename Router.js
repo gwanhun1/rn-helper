@@ -11,10 +11,27 @@ import Two from './src/components/pages/step/Two';
 import Three from './src/components/pages/step/Three';
 import Four from './src/components/pages/step/Four';
 import Five from './src/components/pages/step/Five';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { login } from './src/recoil/Atom';
+import { auth } from './firebaseConfig';
 
 export const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
+  const [isLogin, setIsLogin] = useRecoilState(login);
+
+  useEffect(
+    () =>
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setIsLogin(true);
+        } else {
+          setIsLogin(false);
+        }
+      }),
+    [],
+  );
 
   const WorryStack = () => {
     return (

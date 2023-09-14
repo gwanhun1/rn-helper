@@ -13,14 +13,29 @@ const Container = styled(View)`
 
 const UserContents = () => {
   const [modify, setModify] = useState(false);
+  const [formData, setFormData] = useState<UserInfo>({
+    id: '',
+    password: '',
+    username: '',
+    grade: '',
+  });
 
   return (
     <>
       <SafeAreaView />
       <Center>
         <Container>
-          <InfoForm modify={modify} />
-          <InfoBtn setModify={setModify} />
+          <InfoForm
+            modify={modify}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <InfoBtn
+            setModify={setModify}
+            modify={modify}
+            formData={formData}
+            setFormData={setFormData}
+          />
           <UserDescription />
         </Container>
       </Center>
@@ -29,3 +44,10 @@ const UserContents = () => {
 };
 
 export default UserContents;
+
+export type UserInfo = {
+  id: string;
+  password: string;
+  username: string;
+  grade: string;
+};

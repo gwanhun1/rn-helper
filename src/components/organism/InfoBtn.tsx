@@ -1,11 +1,13 @@
 import React from 'react';
 import Button from '../atoms/Button';
 import { styled } from 'styled-components';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { isUser, login } from '../../recoil/Atom';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../../firebaseConfig';
+import app, { auth } from '../../../firebaseConfig';
+import { getDatabase, ref, set } from 'firebase/database';
+import { UserInfo } from '../pages/UserContents';
 
 const Form = styled(View)`
   width: 100%;
@@ -24,24 +26,72 @@ const Box = styled(View)`
   padding: 5px;
 `;
 
-const InfoBtn = ({ setModify }: InfoBtnProps) => {
+const InfoBtn = ({
+  setModify,
+  setFormData,
+  formData,
+  modify,
+}: InfoBtnProps) => {
   const handleModify = () => {
-    setModify((prev) => !prev);
+    const db = getDatabase(app);
+    const dataRef = ref(db, 'users');
+
+    if (modify) {
+      Alert.alert(
+        '저장',
+        '정말로 저장하시겠습니까?',
+        [
+          {
+            text: '취소',
+            onPress: () => {
+              setModify(false);
+            },
+            style: 'cancel',
+          },
+          {
+            text: '저장',
+            onPress: () => {
+              set(dataRef, {
+                username: formData.username,
+                id: formData.id,
+                password: formData.password,
+                grade: '',
+              })
+                .then(() => {
+                  setModify((prev) => !prev);
+                  console.log('Data successfully written to the database');
+                })
+                .catch((error: any) => {
+                  console.error('Error writing data to the database', error);
+                });
+            },
+            style: 'destructive',
+          },
+        ],
+        {
+          cancelable: true,
+          onDismiss: () => {},
+        },
+      );
+    } else {
+      setModify((prev) => !prev);
+    }
   };
 
   const [isLogin, setIsLogin] = useRecoilState(login);
   const [user, setUser] = useRecoilState<any>(isUser);
 
   const handleSignOut = () => {
-    setIsLogin(false);
-    signOut(auth);
-    setUser({
-      displayName: null,
-      email: '',
-      phoneNumber: null,
-      photoURL: null,
-      providerId: '',
-      uid: '',
+    signOut(auth).then(() => {
+      setIsLogin(false);
+      setUser({
+        displayName: null,
+        email: '',
+        phoneNumber: null,
+        photoURL: null,
+        providerId: '',
+        uid: '',
+      });
     });
   };
 
@@ -71,4 +121,7 @@ export default InfoBtn;
 
 type InfoBtnProps = {
   setModify: React.Dispatch<React.SetStateAction<boolean>>;
+  setFormData: any;
+  formData: UserInfo;
+  modify: boolean;
 };

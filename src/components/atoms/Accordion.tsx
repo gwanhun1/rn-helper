@@ -40,8 +40,9 @@ const PostBox = styled(View)`
 
 const IconBox = styled(View)`
   flex: 1;
+  width: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 `;
 const Accordion = ({ title, content, width }: AccordionProps) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -53,11 +54,11 @@ const Accordion = ({ title, content, width }: AccordionProps) => {
   return (
     <Container width={width}>
       <TouchableOpacityBox onPress={toggleAccordion}>
-        {/* <PostBox>
+        <PostBox>
           <Title ellipsizeMode="tail" numberOfLines={1}>
             {title}
           </Title>
-        </PostBox> */}
+        </PostBox>
         <IconBox>
           {isCollapsed ? (
             <AntDesign name="pluscircleo" size={12} color="gray" />

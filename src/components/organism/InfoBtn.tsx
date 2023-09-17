@@ -2,11 +2,11 @@ import React from 'react';
 import Button from '../atoms/Button';
 import { styled } from 'styled-components';
 import { Alert, View } from 'react-native';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isUser, login } from '../../recoil/Atom';
 import { signOut } from 'firebase/auth';
 import app, { auth } from '../../../firebaseConfig';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, update } from 'firebase/database';
 import { UserInfo } from '../pages/UserContents';
 
 const Form = styled(View)`
@@ -32,9 +32,11 @@ const InfoBtn = ({
   formData,
   modify,
 }: InfoBtnProps) => {
+  const [user, setUser] = useRecoilState<any>(isUser);
+
   const handleModify = () => {
     const db = getDatabase(app);
-    const dataRef = ref(db, 'users');
+    const dataRef = ref(db, `users/${user.uId}`);
 
     if (modify) {
       Alert.alert(
@@ -51,11 +53,8 @@ const InfoBtn = ({
           {
             text: '저장',
             onPress: () => {
-              set(dataRef, {
+              update(dataRef, {
                 username: formData.username,
-                id: formData.id,
-                password: formData.password,
-                grade: '',
               })
                 .then(() => {
                   setModify((prev) => !prev);
@@ -79,7 +78,6 @@ const InfoBtn = ({
   };
 
   const [isLogin, setIsLogin] = useRecoilState(login);
-  const [user, setUser] = useRecoilState<any>(isUser);
 
   const handleSignOut = () => {
     signOut(auth).then(() => {

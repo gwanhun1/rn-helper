@@ -91,8 +91,9 @@ const LoginInputBox = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const db = getDatabase(app);
-  const dataRef = ref(db, 'users');
+  const [isSignUp] = useRecoilState(signUp);
+  const [user, setUser] = useRecoilState<any>(isUser);
+  const [, setIsLogin] = useRecoilState(login);
 
   const handleSignup = async () => {
     try {
@@ -116,34 +117,43 @@ const LoginInputBox = () => {
         userName,
         password,
       );
+      const user = await userCredential.user;
+      const userId = await user.uid;
 
-      setIsLogin(true);
+      const db = getDatabase(app);
+      const dataRef = ref(db, `users/${userId}`);
+
+      await setIsLogin(true);
       await navigation.navigate('Home' as never);
       await update(dataRef, {
         loginDate: new Date().toLocaleDateString(),
         count: 3,
+        password: password,
+        id: userName,
+        grade: '',
       });
-      await SaveInfo();
+      await SaveInfo(userId);
     } catch (e) {
       console.error('Login error:', e);
       alert('로그인 정보를 다시 입력해주세요.');
     }
   };
-  const [isSignUp] = useRecoilState(signUp);
-  const [user, setUser] = useRecoilState<any>(isUser);
-  const [, setIsLogin] = useRecoilState(login);
+  const SaveInfo = (userId: any) => {
+    const db = getDatabase(app);
+    const dataRef = ref(db, `users/${userId}`);
 
-  const SaveInfo = () => {
     get(dataRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
+
           setUser({
             username: userData.username,
             id: userData.id,
             password: userData.password,
             grade: userData.grade,
             loginDate: userData.loginDate,
+            uId: userId,
             count:
               new Date().toLocaleDateString() !== userData.loginDate
                 ? userData.count
@@ -157,7 +167,6 @@ const LoginInputBox = () => {
         console.error('Error getting data from the database', error);
       });
   };
-
   return (
     <InputBox>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

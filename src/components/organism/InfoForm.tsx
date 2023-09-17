@@ -91,7 +91,6 @@ const NoneUsername = styled(Text)`
 
 const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
   const [user, setUser] = useRecoilState<any>(isUser);
-  console.log(user);
   const handleChange = (name: string, value: string) => {
     setFormData((prevFormData: any) => ({
       ...prevFormData,
@@ -99,9 +98,9 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
     }));
   };
 
-  const db = getDatabase(app);
-  const dataRef = ref(db, 'users');
   useEffect(() => {
+    const db = getDatabase(app);
+    const dataRef = ref(db, `users/${user.uId}`);
     get(dataRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -164,9 +163,11 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
             <IdPw>{formData.id}</IdPw>
 
             <IdPw>
-              {formData.password.split('').map((char, index) => (
-                <PwCircle key={index} />
-              ))}
+              {
+                formData && user.password
+                // .split('')
+                // .map((char, index) => <PwCircle key={index} />)
+              }
             </IdPw>
           </>
         )}

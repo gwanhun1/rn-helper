@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   TextInput,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
 import { isUser, login, signUp } from '../../recoil/Atom';
 import { useRecoilState } from 'recoil';
@@ -16,7 +16,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import app, { auth } from '../../../firebaseConfig';
-import { get, getDatabase, ref } from 'firebase/database';
+import { get, getDatabase, ref, update } from 'firebase/database';
 
 const IDInput = styled(TextInput)`
   width: 80%;
@@ -91,6 +91,9 @@ const LoginInputBox = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
+  const db = getDatabase(app);
+  const dataRef = ref(db, 'users');
+
   const handleSignup = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -115,8 +118,12 @@ const LoginInputBox = () => {
       );
 
       setIsLogin(true);
-      navigation.navigate('Home' as never);
-      SaveInfo();
+      await navigation.navigate('Home' as never);
+      await update(dataRef, {
+        loginDate: new Date().toLocaleDateString(),
+        count: 3,
+      });
+      await SaveInfo();
     } catch (e) {
       console.error('Login error:', e);
       alert('로그인 정보를 다시 입력해주세요.');
@@ -127,8 +134,6 @@ const LoginInputBox = () => {
   const [, setIsLogin] = useRecoilState(login);
 
   const SaveInfo = () => {
-    const db = getDatabase(app);
-    const dataRef = ref(db, 'users');
     get(dataRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -138,6 +143,11 @@ const LoginInputBox = () => {
             id: userData.id,
             password: userData.password,
             grade: userData.grade,
+            loginDate: userData.loginDate,
+            count:
+              new Date().toLocaleDateString() !== userData.loginDate
+                ? userData.count
+                : user.count,
           });
         } else {
           console.log('No data available at the "users" location');
@@ -147,6 +157,7 @@ const LoginInputBox = () => {
         console.error('Error getting data from the database', error);
       });
   };
+
   return (
     <InputBox>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -154,6 +165,7 @@ const LoginInputBox = () => {
           value={userName}
           onChangeText={(userName) => setUserName(userName)}
           placeholder={'아이디 입력해주세요.'}
+          keyboardType="email-address"
         />
       </TouchableWithoutFeedback>
 
@@ -162,6 +174,7 @@ const LoginInputBox = () => {
           value={password}
           onChangeText={setPassword}
           placeholder={'비밀번호를 입력해주세요.'}
+          secureTextEntry
         />
       </TouchableWithoutFeedback>
 

@@ -91,7 +91,7 @@ const NoneUsername = styled(Text)`
 
 const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
   const [user, setUser] = useRecoilState<any>(isUser);
-
+  console.log(user);
   const handleChange = (name: string, value: string) => {
     setFormData((prevFormData: any) => ({
       ...prevFormData,

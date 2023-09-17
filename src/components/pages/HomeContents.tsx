@@ -6,14 +6,14 @@ import AwardBox from '../template/AwardBox';
 import useRefresh from '../../hooks/useRefresh';
 import useGetDate from '../../hooks/useGetDate';
 import app from '../../../firebaseConfig';
-import { getDatabase, ref, set } from 'firebase/database';
+
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
 const HomeContents = () => {
   const { refreshing, onRefresh } = useRefresh();
   const { monthString, weekString } = useGetDate();
   const [user] = useRecoilState(isUser);
-  console.log(user);
+
   return (
     <>
       <SafeAreaViews

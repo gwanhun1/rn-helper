@@ -17,5 +17,7 @@ export const isUser = atom({
     username: '',
     password: '',
     grade: '',
+    lastLogin: '',
+    count: 3,
   },
 });

@@ -22,3 +22,8 @@ export const isUser = atom({
     uId: '',
   },
 });
+
+export const PostContent = atom({
+  key: 'content',
+  default: { oneStep: '', twoStep: '', content: '' },
+});

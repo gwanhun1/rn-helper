@@ -17,6 +17,10 @@ import { useNavigation } from '@react-navigation/native';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AllCenter from '../../atoms/AllCenter';
+import { getDatabase, ref, set } from 'firebase/database';
+import app from '../../../../firebaseConfig';
+import { useRecoilState } from 'recoil';
+import { isUser } from '../../../recoil/Atom';
 
 const Final = styled(View)`
   height: 100%;
@@ -32,6 +36,19 @@ const ShadowBox = styled(Shadow)`
 `;
 
 const Five = () => {
+  const [user] = useRecoilState(isUser);
+
+  const text = '';
+  const db = getDatabase(app);
+  const dataRef = ref(db, `contents/${user.uId}`);
+  const handlePost = async () => {
+    if (user.uId) {
+      await set(dataRef, { content: text });
+    } else {
+      console.log('error');
+    }
+  };
+
   return (
     <View>
       <SafeAreaViewTitle

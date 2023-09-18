@@ -3,6 +3,9 @@ import Button from '../../atoms/Button';
 import { ScrollView, View } from 'react-native';
 import { styled } from 'styled-components';
 import UseNavigate from '../../../hooks/useNavigate';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { PostContent } from '../../../recoil/Atom';
 
 const FormBox = styled(View)`
   margin-bottom: 200px;
@@ -32,8 +35,15 @@ const BigBox = styled(View)`
 
 const Two = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep3' });
-
-  const BtnClick = (e: any) => {};
+  const [content, setContent] = useRecoilState(PostContent);
+  const handlePost = async (what: any) => {
+    await setContent((prev) => ({ ...prev, twoStep: what }));
+  };
+  useEffect(() => {
+    if (content.twoStep) {
+      MoveStep();
+    }
+  }, [content]);
 
   return (
     <FormBox>
@@ -49,7 +59,7 @@ const Two = () => {
               text={'웃기게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('웃기게')}
             />
           </BigBox>
           <Box>
@@ -57,7 +67,7 @@ const Two = () => {
               text={'츤데레'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('츤데레')}
             />
           </Box>
           <Box>
@@ -65,7 +75,7 @@ const Two = () => {
               text={'차갑게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('차갑게')}
             />
           </Box>
         </Form>
@@ -75,7 +85,7 @@ const Two = () => {
               text={'따뜻하게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('따뜻하게')}
             />
           </Box>
           <Box>
@@ -83,7 +93,7 @@ const Two = () => {
               text={'정신번쩍'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('정신번쩍')}
             />
           </Box>
         </Form>
@@ -93,7 +103,7 @@ const Two = () => {
               text={'공감'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('공감')}
             />
           </Box>
           <Box>
@@ -101,7 +111,7 @@ const Two = () => {
               text={'어색'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('어색')}
             />
           </Box>
           <Box>
@@ -109,7 +119,7 @@ const Two = () => {
               text={'울면서'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('울면서')}
             />
           </Box>
         </Form>
@@ -119,7 +129,7 @@ const Two = () => {
               text={'추앙하며'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('추앙하며')}
             />
           </Box>
           <Box>
@@ -127,7 +137,7 @@ const Two = () => {
               text={'놀리면서'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('놀리면서')}
             />
           </Box>
         </Form>
@@ -137,7 +147,7 @@ const Two = () => {
               text={'재밌게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('재밌게')}
             />
           </Box>
           <Box>
@@ -145,7 +155,7 @@ const Two = () => {
               text={'짜증'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('짜증')}
             />
           </Box>
           <Box>
@@ -153,7 +163,7 @@ const Two = () => {
               text={'투덜'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('투덜')}
             />
           </Box>
         </Form>
@@ -163,7 +173,7 @@ const Two = () => {
               text={'서운하게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('서운하게')}
             />
           </Box>
           <Box>
@@ -171,7 +181,7 @@ const Two = () => {
               text={'눈물나게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('눈물나게')}
             />
           </Box>
         </Form>
@@ -181,7 +191,7 @@ const Two = () => {
               text={'매정'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('매정')}
             />
           </Box>
           <Box>
@@ -189,7 +199,7 @@ const Two = () => {
               text={'내 편'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('내 편')}
             />
           </Box>
           <Box>
@@ -197,7 +207,7 @@ const Two = () => {
               text={'무섭게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('무섭게')}
             />
           </Box>
         </Form>
@@ -207,7 +217,7 @@ const Two = () => {
               text={'든든하게'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={() => handlePost('든든하게')}
             />
           </Box>
           <Box>

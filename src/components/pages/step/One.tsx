@@ -1,9 +1,11 @@
 import { View, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
 import SafeAreaViewTitle from '../../organism/SafeAreaViewTitle';
 import Button from '../../atoms/Button';
 import UseNavigate from '../../../hooks/useNavigate';
+import { useRecoilState } from 'recoil';
+import { PostContent } from '../../../recoil/Atom';
 
 const Form = styled(View)`
   width: 100%;
@@ -26,6 +28,15 @@ const FormBox = styled(View)`
 
 const One = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep2' });
+  const [content, setContent] = useRecoilState(PostContent);
+  const handlePost = async (what: any) => {
+    await setContent((prev) => ({ ...prev, oneStep: what }));
+  };
+  useEffect(() => {
+    if (content.oneStep) {
+      MoveStep();
+    }
+  }, [content]);
 
   return (
     <FormBox>
@@ -41,7 +52,7 @@ const One = () => {
               text={'아이'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('아이')}
             />
           </Box>
           <Box>
@@ -49,7 +60,7 @@ const One = () => {
               text={'학생'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('학생')}
             />
           </Box>
           <Box>
@@ -57,7 +68,7 @@ const One = () => {
               text={'어른'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('어른')}
             />
           </Box>
         </Form>
@@ -67,7 +78,7 @@ const One = () => {
               text={'할머니'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('할머니')}
             />
           </Box>
           <Box>
@@ -75,7 +86,7 @@ const One = () => {
               text={'할아버지'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('할아버지')}
             />
           </Box>
         </Form>
@@ -85,7 +96,7 @@ const One = () => {
               text={'엄마'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('엄마')}
             />
           </Box>
           <Box>
@@ -93,7 +104,7 @@ const One = () => {
               text={'아빠'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('아빠')}
             />
           </Box>
           <Box>
@@ -101,7 +112,7 @@ const One = () => {
               text={'강아지'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('강아지')}
             />
           </Box>
         </Form>
@@ -111,7 +122,7 @@ const One = () => {
               text={'동네 아저씨'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('동네 아저씨')}
             />
           </Box>
           <Box>
@@ -119,7 +130,7 @@ const One = () => {
               text={'옆집 아줌마'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('옆집 아줌마')}
             />
           </Box>
         </Form>
@@ -129,7 +140,7 @@ const One = () => {
               text={'외계인'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('외계인')}
             />
           </Box>
           <Box>
@@ -137,7 +148,7 @@ const One = () => {
               text={'삼촌'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('삼촌')}
             />
           </Box>
           <Box>
@@ -145,7 +156,7 @@ const One = () => {
               text={'이모'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('이모')}
             />
           </Box>
         </Form>
@@ -155,7 +166,7 @@ const One = () => {
               text={'동네 백수'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('동네 백수')}
             />
           </Box>
           <Box>
@@ -163,7 +174,7 @@ const One = () => {
               text={'척척박사'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('척척박사')}
             />
           </Box>
         </Form>
@@ -173,7 +184,7 @@ const One = () => {
               text={'전문가'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('전문가')}
             />
           </Box>
           <Box>
@@ -181,7 +192,7 @@ const One = () => {
               text={'T 100%'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('T 100%')}
             />
           </Box>
           <Box>
@@ -189,7 +200,7 @@ const One = () => {
               text={'박찬호'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('박찬호')}
             />
           </Box>
         </Form>
@@ -199,7 +210,7 @@ const One = () => {
               text={'심리상담사'}
               fontSize={20}
               bgColor={'#54d2af'}
-              onPress={MoveStep}
+              onPress={() => handlePost('심리상담사')}
             />
           </Box>
           <Box>

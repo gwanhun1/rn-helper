@@ -102,6 +102,10 @@ const LoginInputBox = () => {
         userName,
         password,
       );
+      await navigation.navigate('Home' as never);
+      await alert('환영합니다 🎉');
+      await handleLogin();
+
       console.log('Signup success:', userCredential.user);
       // Add any navigation or success logic here
     } catch (e) {

@@ -11,6 +11,11 @@ import { styled } from 'styled-components';
 import Button from '../../atoms/Button';
 import SafeAreaViewTitle from '../../organism/SafeAreaViewTitle';
 import UseNavigate from '../../../hooks/useNavigate';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { PostContent, isUser } from '../../../recoil/Atom';
+import { getDatabase, ref, set } from 'firebase/database';
+import app from '../../../../firebaseConfig';
 
 const Container = styled(View)`
   flex: 1;
@@ -48,6 +53,18 @@ const Boxes = styled(View)`
 
 const Three = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep4' });
+  const [text, setText] = useState('');
+  const [user] = useRecoilState(isUser);
+
+  const [content, setContent] = useRecoilState(PostContent);
+  const handlePost = async () => {
+    await setContent((prev) => ({ ...prev, content: text }));
+  };
+  useEffect(() => {
+    if (content.content) {
+      MoveStep();
+    }
+  }, [content]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -65,6 +82,8 @@ const Three = () => {
               multiline={true}
               blurOnSubmit={true}
               placeholder="당신의 이야기를 들려주세요 🙂"
+              onChangeText={(newText) => setText(newText)} // 텍스트 변경 시 호출되는 콜백 함수
+              value={text} // 현재 텍스트 값을 설정
             />
           </ShadowBox>
         </KeyboardAvoidingContainer>
@@ -75,7 +94,7 @@ const Three = () => {
               text={'보내기'}
               fontSize={20}
               bgColor={'#4abd9d'}
-              onPress={MoveStep}
+              onPress={handlePost}
             />
           </Boxes>
           <Boxes>

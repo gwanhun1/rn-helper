@@ -41,6 +41,7 @@ const PostBox = styled(View)`
 const IconBox = styled(View)`
   flex: 1;
   width: 100%;
+  margin: 10px;
   justify-content: center;
   align-items: flex-end;
 `;

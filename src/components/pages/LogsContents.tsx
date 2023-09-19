@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, FlatList, RefreshControl } from 'react-native';
 import styled from 'styled-components/native';
 import LogsItems from '../organism/LogsItems';
 import SafeAreaViews from '../organism/SafeAreaViews';
 import useRefresh from '../../hooks/useRefresh';
+import { useRecoilState } from 'recoil';
+import { isUser } from '../../recoil/Atom';
+import app from '../../../firebaseConfig';
+import { get, getDatabase, ref } from 'firebase/database';
 
 const Container = styled(View)`
   justify-content: center;
@@ -26,6 +30,29 @@ const FlatListContent = styled(FlatList)<LogItem>`
 const LogsContents: React.FC = () => {
   const { refreshing, onRefresh } = useRefresh();
 
+  const [user] = useRecoilState(isUser);
+  const [data, setData] = useState([]);
+  const db = getDatabase(app);
+  const dataRef = ref(db, `logs/${user.uId}`);
+  useEffect(() => {
+    if (refreshing) {
+      get(dataRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+
+            // const reversedData = Object.values(userData).reverse();
+            setData(userData);
+          } else {
+            console.log('No data available at the "logs" location');
+          }
+        })
+        .catch((error) => {
+          console.error('Error getting data from the database', error);
+        });
+    }
+  }, [user, refreshing]);
+
   const renderItem: React.FC<{ item: LogItem }> = ({ item }) => {
     return <LogsItems item={item} />;
   };
@@ -38,13 +65,13 @@ const LogsContents: React.FC = () => {
         color={'white'}
       />
       <Container>
-        {INITDATA.length === 0 ? (
-          <EmptyText>텅...</EmptyText>
-        ) : (
+        {data.length > 0 ? (
           <FlatListContent<any>
-            data={INITDATA}
+            data={data.filter((item) => item)}
             renderItem={renderItem}
-            keyExtractor={(item: any) => item.id.toString()}
+            keyExtractor={(item: any, index: { toString: () => any }) =>
+              index.toString()
+            }
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}
@@ -54,6 +81,8 @@ const LogsContents: React.FC = () => {
               />
             }
           />
+        ) : (
+          <EmptyText>텅...</EmptyText>
         )}
       </Container>
     </>
@@ -61,18 +90,6 @@ const LogsContents: React.FC = () => {
 };
 
 export default LogsContents;
-
-const INITDATA: LogItem[] = [
-  { id: 0, date: 'aaa', text: '111' },
-  { id: 1, date: 'bbb', text: '222' },
-  { id: 2, date: 'ccc', text: '333' },
-  { id: 3, date: 'ddd', text: '444' },
-  { id: 4, date: 'eee', text: '555' },
-  { id: 5, date: 'hhh', text: '555' },
-  { id: 6, date: 'ggg', text: '555' },
-  { id: 7, date: 'ddd', text: '555' },
-  { id: 8, date: 'www', text: '555' },
-];
 
 type LogItem = {
   id: number;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Accordion from '../atoms/Accordion';
@@ -6,11 +6,15 @@ import { Flex as FlexDefault } from '@react-native-material/core';
 import PostBox from '../molecules/PostBox';
 import Card from '../atoms/Card';
 import ListItem from '../atoms/ListItem';
+import { useRecoilState } from 'recoil';
+import { isUser } from '../../recoil/Atom';
+import { get, getDatabase, ref } from 'firebase/database';
+import app from '../../../firebaseConfig';
 
 type LogItem = {
-  id: number;
+  quest: string;
   date: string;
-  text: string;
+  response: string;
 };
 
 const Flex = styled(FlexDefault)`
@@ -31,9 +35,9 @@ const LogsItems: React.FC<{ item: LogItem }> = ({ item }) => {
   return (
     <ListItem>
       <Flex>
-        <Accordion title={'post'} content="11111" width={90} />
+        <Accordion title={item.quest} content={item.response} width={90} />
         <SubText ellipsizeMode="tail" numberOfLines={1}>
-          7.18
+          {item.date}
         </SubText>
       </Flex>
     </ListItem>

@@ -57,14 +57,12 @@ const Three = () => {
   const [user] = useRecoilState(isUser);
 
   const [content, setContent] = useRecoilState(PostContent);
+
+  console.log(content);
   const handlePost = async () => {
     await setContent((prev) => ({ ...prev, content: text }));
+    await MoveStep();
   };
-  useEffect(() => {
-    if (content.content) {
-      MoveStep();
-    }
-  }, [content]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

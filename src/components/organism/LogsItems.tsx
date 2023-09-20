@@ -31,11 +31,11 @@ const SubText = styled(Text)`
   width: 50px;
 `;
 
-const LogsItems: React.FC<{ item: LogItem }> = ({ item }) => {
+const LogsItems: React.FC<{ item: any }> = ({ item }) => {
   return (
     <ListItem>
       <Flex>
-        <Accordion title={item.quest} content={item.response} width={90} />
+        <Accordion title={item.content} content={item.response} width={90} />
         <SubText ellipsizeMode="tail" numberOfLines={1}>
           {item.date}
         </SubText>

@@ -3,6 +3,8 @@ import { Text, View } from 'react-native';
 import { styled } from 'styled-components';
 import AllCenter from '../../atoms/AllCenter';
 import UseNavigate from '../../../hooks/useNavigate';
+import { useRecoilState } from 'recoil';
+import { PostContent } from '../../../recoil/Atom';
 
 const LoadingText = styled(Text)`
   color: #4abd9d;
@@ -18,9 +20,15 @@ const Four = () => {
     '조합하는 중 😍',
   ];
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep5' });
+
+  useEffect(() => {
+    setContent((prev) => ({ ...prev, response: 'good?' }));
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (textStep === 3) {
+        MoveStep();
       }
       setTextStep((prev) => (prev + 1) % 4);
     }, 1000);
@@ -29,6 +37,7 @@ const Four = () => {
       clearTimeout(timer);
     };
   }, [textStep, MoveStep]);
+  const [content, setContent] = useRecoilState(PostContent);
 
   return (
     <View>

@@ -17,10 +17,10 @@ import { useNavigation } from '@react-navigation/native';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AllCenter from '../../atoms/AllCenter';
-import { getDatabase, ref, set } from 'firebase/database';
+import { get, getDatabase, push, ref, set } from 'firebase/database';
 import app from '../../../../firebaseConfig';
 import { useRecoilState } from 'recoil';
-import { isUser } from '../../../recoil/Atom';
+import { PostContent, isUser } from '../../../recoil/Atom';
 
 const Final = styled(View)`
   height: 100%;
@@ -37,17 +37,51 @@ const ShadowBox = styled(Shadow)`
 
 const Five = () => {
   const [user] = useRecoilState(isUser);
+  const [content, setContent] = useRecoilState(PostContent);
 
-  const text = '';
   const db = getDatabase(app);
-  const dataRef = ref(db, `contents/${user.uId}`);
-  const handlePost = async () => {
+  const dataRef = ref(db, `logs/${user.uId}`);
+
+  useEffect(() => {
     if (user.uId) {
-      await set(dataRef, { content: text });
+      get(dataRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const existingData = snapshot.val();
+            const dataArray = Object.values(existingData);
+
+            const newData = {
+              content: content.oneStep + content.twoStep + content.content,
+              response: 'good?',
+              date: new Date().toLocaleDateString(),
+            };
+
+            const newKey = push(dataRef, newData).key;
+
+            dataArray.push({ ...newData, id: newKey });
+
+            set(dataRef, dataArray);
+          } else {
+            const db = getDatabase(app);
+            const dataRef = ref(db, `logs/${user.uId}/0`);
+
+            const newData = {
+              content: content.oneStep + content.twoStep + content.content,
+              response: 'good?',
+              date: new Date().toLocaleDateString(),
+            };
+
+            set(dataRef, newData);
+            console.log('No data available at the "logs" location');
+          }
+        })
+        .catch((error) => {
+          console.error('Error getting data from the database', error);
+        });
     } else {
       console.log('error');
     }
-  };
+  }, []);
 
   return (
     <View>
@@ -58,7 +92,7 @@ const Five = () => {
       />
       <ShadowBox>
         <Final>
-          <AdviceText>Five</AdviceText>
+          <AdviceText>{content.response}</AdviceText>
         </Final>
       </ShadowBox>
     </View>

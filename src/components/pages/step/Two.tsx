@@ -38,12 +38,8 @@ const Two = () => {
   const [content, setContent] = useRecoilState(PostContent);
   const handlePost = async (what: any) => {
     await setContent((prev) => ({ ...prev, twoStep: what }));
+    await MoveStep();
   };
-  useEffect(() => {
-    if (content.twoStep) {
-      MoveStep();
-    }
-  }, [content]);
 
   return (
     <FormBox>

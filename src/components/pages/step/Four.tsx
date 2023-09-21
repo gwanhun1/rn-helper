@@ -27,10 +27,8 @@ const Four = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (textStep === 3) {
-        MoveStep();
-      }
-      setTextStep((prev) => (prev + 1) % 4);
+      MoveStep();
+      setTextStep(0);
     }, 1000);
 
     return () => {

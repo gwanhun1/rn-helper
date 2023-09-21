@@ -80,17 +80,40 @@ const InfoBtn = ({
   const [isLogin, setIsLogin] = useRecoilState(login);
 
   const handleSignOut = () => {
-    signOut(auth).then(() => {
-      setIsLogin(false);
-      setUser({
-        displayName: null,
-        email: '',
-        phoneNumber: null,
-        photoURL: null,
-        providerId: '',
-        uid: '',
-      });
-    });
+    Alert.alert(
+      '로그아웃',
+      '정말로 로그아웃하시겠습니까?',
+      [
+        {
+          text: '취소',
+          onPress: () => {
+            setModify(false);
+          },
+          style: 'cancel',
+        },
+        {
+          text: '로그아웃',
+          onPress: () => {
+            signOut(auth).then(() => {
+              setIsLogin(false);
+              setUser({
+                displayName: null,
+                email: '',
+                phoneNumber: null,
+                photoURL: null,
+                providerId: '',
+                uid: '',
+              });
+            });
+          },
+          style: 'destructive',
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {},
+      },
+    );
   };
 
   return (

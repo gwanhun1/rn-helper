@@ -107,7 +107,9 @@ const PostBox = ({ icon, username, post, content }: PostBoxProps) => {
           )}
         </Box>
 
-        <Accordion title={'post'} content="11111" width={70} />
+        {content && post && (
+          <Accordion title={post} content={content} width={70} />
+        )}
         {username && (
           <SubText ellipsizeMode="tail" numberOfLines={1}>
             {username}

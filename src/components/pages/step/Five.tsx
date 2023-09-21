@@ -41,38 +41,32 @@ const Five = () => {
 
   const db = getDatabase(app);
   const dataRef = ref(db, `logs/${user.uId}`);
+  const dataAllRef = ref(db, `contents`);
 
   useEffect(() => {
     if (user.uId) {
       get(dataRef)
         .then((snapshot) => {
+          const newData = {
+            content: content.oneStep + content.twoStep + content.content,
+            response: 'good?',
+            date: new Date().toLocaleDateString(),
+            username: user.username ? user.username : 'username',
+          };
+
           if (snapshot.exists()) {
             const existingData = snapshot.val();
             const dataArray = Object.values(existingData);
-
-            const newData = {
-              content: content.oneStep + content.twoStep + content.content,
-              response: 'good?',
-              date: new Date().toLocaleDateString(),
-            };
-
             const newKey = push(dataRef, newData).key;
-
             dataArray.push({ ...newData, id: newKey });
 
             set(dataRef, dataArray);
+
+            const newAllKey = push(dataAllRef, newData).key;
           } else {
-            const db = getDatabase(app);
-            const dataRef = ref(db, `logs/${user.uId}/0`);
+            set(dataRef, [newData]);
 
-            const newData = {
-              content: content.oneStep + content.twoStep + content.content,
-              response: 'good?',
-              date: new Date().toLocaleDateString(),
-            };
-
-            set(dataRef, newData);
-            console.log('No data available at the "logs" location');
+            set(dataAllRef, [newData]);
           }
         })
         .catch((error) => {

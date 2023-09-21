@@ -57,8 +57,6 @@ const Three = () => {
   const [user] = useRecoilState(isUser);
 
   const [content, setContent] = useRecoilState(PostContent);
-
-  console.log(content);
   const handlePost = async () => {
     await setContent((prev) => ({ ...prev, content: text }));
     await MoveStep();

@@ -61,8 +61,6 @@ const LogsContents: React.FC = () => {
 
   const [isLogin] = useRecoilState(login);
 
-  console.log(data);
-
   return (
     <>
       <SafeAreaViews

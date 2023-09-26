@@ -33,6 +33,12 @@ export const BottomTabs = () => {
     [],
   );
 
+  const goToWorryHome = () => {
+    navigation.dispatch(
+      CommonActions.reset({ index: 0, routes: [{ name: 'WorryHome' }] }),
+    );
+  };
+
   const WorryStack = () => {
     return (
       <Stack.Navigator

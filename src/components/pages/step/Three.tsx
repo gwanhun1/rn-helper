@@ -16,6 +16,7 @@ import { useRecoilState } from 'recoil';
 import { PostContent, isUser } from '../../../recoil/Atom';
 import { getDatabase, ref, set } from 'firebase/database';
 import app from '../../../../firebaseConfig';
+import { useNavigation } from '@react-navigation/native';
 
 const Container = styled(View)`
   flex: 1;
@@ -55,11 +56,18 @@ const Three = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep4' });
   const [text, setText] = useState('');
   const [user] = useRecoilState(isUser);
+  const navigation = useNavigation();
 
   const [content, setContent] = useRecoilState(PostContent);
   const handlePost = async () => {
     await setContent((prev) => ({ ...prev, content: text }));
-    await MoveStep();
+
+    if (user.id) {
+      await MoveStep();
+    } else {
+      navigation.navigate('마이페이지' as never);
+      alert('로그인 먼저 해주세요 🥹');
+    }
   };
 
   return (

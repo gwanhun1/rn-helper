@@ -24,18 +24,20 @@ const RuleContent = styled(Text)`
 const UserDescription = () => {
   return (
     <Center>
-      <RuleTextUnderline>
+      {/* <RuleTextUnderline>
         <RuleText>고객센터</RuleText>
       </RuleTextUnderline>
-      <RuleContent>정식버전에서 만나보실 수 있습니다.</RuleContent>
+      <RuleContent>정식버전에서 만나보실 수 있습니다.</RuleContent> */}
       <RuleTextUnderline>
         <RuleText>공지사항</RuleText>
       </RuleTextUnderline>
       <RuleContent>정식버전에서 만나보실 수 있습니다.</RuleContent>
+      <RuleContent>2023.10.5 첫 개시!!</RuleContent>
       <RuleTextUnderline>
         <RuleText>1:1 문의</RuleText>
       </RuleTextUnderline>
       <RuleContent>정식버전에서 만나보실 수 있습니다.</RuleContent>
+      <RuleContent>문의는 wjdrhksgns7602@gmail.com 으로 주세요.</RuleContent>
     </Center>
   );
 };

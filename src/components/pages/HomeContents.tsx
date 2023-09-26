@@ -33,9 +33,9 @@ const HomeContents = () => {
           />
         }
       >
-        <AwardBox title="주간 " subTitle={weekString} />
-        <AwardBox title="월간 " subTitle={monthString} />
-        <AwardBox title="좋아요 " subTitle="축하합니다" />
+        <AwardBox title="주간" subTitle={weekString} />
+        <AwardBox title="월간" subTitle={monthString} />
+        <AwardBox title="좋아요" subTitle="축하합니다" />
       </ScrollView>
     </>
   );

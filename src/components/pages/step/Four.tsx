@@ -22,10 +22,6 @@ const Four = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep5' });
 
   useEffect(() => {
-    setContent((prev) => ({ ...prev, response: 'good?' }));
-  }, []);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       MoveStep();
       setTextStep(0);
@@ -36,6 +32,10 @@ const Four = () => {
     };
   }, [textStep, MoveStep]);
   const [content, setContent] = useRecoilState(PostContent);
+
+  if (content.content.length < 0) {
+    setTextStep(0);
+  }
 
   return (
     <View>

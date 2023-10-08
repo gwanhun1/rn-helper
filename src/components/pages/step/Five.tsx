@@ -42,14 +42,13 @@ const Five = () => {
   const db = getDatabase(app);
   const dataRef = ref(db, `logs/${user.uId}`);
   const dataAllRef = ref(db, `contents`);
-
   useEffect(() => {
-    if (user.uId) {
+    if (user.uId && content.content && content.response) {
       get(dataRef)
         .then((snapshot) => {
           const newData = {
-            content: content.oneStep + content.twoStep + content.content,
-            response: 'good?',
+            content: content.content,
+            response: content.response,
             date: new Date().toLocaleDateString(),
             username: user.username ? user.username : 'username',
           };
@@ -61,12 +60,11 @@ const Five = () => {
             dataArray.push({ ...newData, id: newKey });
 
             set(dataRef, dataArray);
-
-            const newAllKey = push(dataAllRef, newData).key;
+            push(dataAllRef, newData);
           } else {
             set(dataRef, [newData]);
 
-            set(dataAllRef, [newData]);
+            push(dataAllRef, newData);
           }
         })
         .catch((error) => {
@@ -75,7 +73,9 @@ const Five = () => {
     } else {
       console.log('error');
     }
-  }, []);
+  }, [user.uId]);
+
+  console.log(content);
 
   return (
     <View>

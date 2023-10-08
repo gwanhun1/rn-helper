@@ -5,7 +5,7 @@ import LogsItems from '../organism/LogsItems';
 import SafeAreaViews from '../organism/SafeAreaViews';
 import useRefresh from '../../hooks/useRefresh';
 import { useRecoilState } from 'recoil';
-import { isUser, login } from '../../recoil/Atom';
+import { PostContent, isUser, login } from '../../recoil/Atom';
 import app from '../../../firebaseConfig';
 import { get, getDatabase, ref } from 'firebase/database';
 
@@ -34,6 +34,8 @@ const LogsContents: React.FC = () => {
   const [data, setData] = useState([]);
   const db = getDatabase(app);
   const dataRef = ref(db, `logs/${user.uId}`);
+  const [content, setContent] = useRecoilState(PostContent);
+
   useEffect(() => {
     if (isLogin) {
       get(dataRef)
@@ -53,7 +55,7 @@ const LogsContents: React.FC = () => {
     } else {
       setData([]);
     }
-  }, [user, refreshing]);
+  }, [user, refreshing, content.content]);
 
   const renderItem: React.FC<{ item: LogItem }> = ({ item }) => {
     return <LogsItems item={item} />;

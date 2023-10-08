@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SafeAreaViews from '../organism/SafeAreaViews';
 import Blank from '../atoms/BoxNope';
 import { RefreshControl, ScrollView } from 'react-native';
@@ -9,10 +9,12 @@ import app from '../../../firebaseConfig';
 
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
+
 const HomeContents = () => {
   const { refreshing, onRefresh } = useRefresh();
   const { monthString, weekString } = useGetDate();
   const [user] = useRecoilState(isUser);
+
   return (
     <>
       <SafeAreaViews

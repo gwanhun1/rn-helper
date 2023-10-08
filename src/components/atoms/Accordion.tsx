@@ -70,9 +70,7 @@ const Accordion = ({ title, content, width }: AccordionProps) => {
       </TouchableOpacityBox>
       <Collapsible collapsed={isCollapsed}>
         <Content>
-          <ContentText ellipsizeMode="tail" numberOfLines={1}>
-            {content}
-          </ContentText>
+          <ContentText ellipsizeMode="tail">{content}</ContentText>
         </Content>
       </Collapsible>
     </Container>

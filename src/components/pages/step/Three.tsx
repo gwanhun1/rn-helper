@@ -53,17 +53,56 @@ const Boxes = styled(View)`
 `;
 
 const Three = () => {
-  const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep4' });
+  const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep5' });
   const [text, setText] = useState('');
   const [user] = useRecoilState(isUser);
   const navigation = useNavigation();
+  const [apiCalled, setApiCalled] = useState(false);
 
+  async function getBotResponse(userMessage) {
+    if (!apiCalled) {
+      setApiCalled(true);
+      const apiUrl = 'https://api.openai.com/v1/chat/completions';
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer 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`,
+      };
+      const data = {
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: `너가 ${content.oneStep}라면 고민 ${userMessage}을 뭐라고 조언 할 것 같아? ${content.twoStep} 느낌으로 짧게 조언해줘`,
+          },
+        ],
+      };
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: headers,
+          body: JSON.stringify(data),
+        });
+
+        const responseData = await response.json();
+        setContent({
+          ...content,
+          response: responseData.choices[0].message.content,
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  }
   const [content, setContent] = useRecoilState(PostContent);
+
   const handlePost = async () => {
-    await setContent((prev) => ({ ...prev, content: text }));
+    if (content.content) {
+      await getBotResponse(text);
+    }
 
     if (user.id) {
-      await MoveStep();
+      MoveStep();
     } else {
       navigation.navigate('마이페이지' as never);
       alert('로그인 먼저 해주세요 🥹');
@@ -86,8 +125,11 @@ const Three = () => {
               multiline={true}
               blurOnSubmit={true}
               placeholder="당신의 이야기를 들려주세요 🙂"
-              onChangeText={(newText) => setText(newText)} // 텍스트 변경 시 호출되는 콜백 함수
-              value={text} // 현재 텍스트 값을 설정
+              onChangeText={(newText) => {
+                setText(newText);
+                setContent((prev) => ({ ...prev, content: newText }));
+              }}
+              value={text}
             />
           </ShadowBox>
         </KeyboardAvoidingContainer>

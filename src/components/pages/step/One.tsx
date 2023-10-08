@@ -34,6 +34,11 @@ const One = () => {
     await MoveStep();
   };
 
+  useEffect(
+    () => setContent({ oneStep: '', twoStep: '', content: '', response: '' }),
+    [],
+  );
+
   return (
     <FormBox>
       <SafeAreaViewTitle

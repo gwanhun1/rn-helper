@@ -9,7 +9,7 @@ import Center from '../atoms/Center';
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
 import { get, getDatabase, ref } from 'firebase/database';
-import app from '../../../firebaseConfig';
+import { app } from '../../../firebaseConfig';
 import { UserInfo } from '../pages/UserContents';
 
 const IDInput = styled(TextInput)`

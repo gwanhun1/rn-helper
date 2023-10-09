@@ -7,7 +7,7 @@ import TitleBox from '../molecules/TitleBox';
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
 import { get, getDatabase, ref } from 'firebase/database';
-import app from '../../../firebaseConfig';
+import { app } from '../../../firebaseConfig';
 
 const AwardBox = ({ title, subTitle }: AwardBox) => {
   const [user] = useRecoilState(isUser);

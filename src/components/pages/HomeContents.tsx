@@ -5,7 +5,7 @@ import { RefreshControl, ScrollView } from 'react-native';
 import AwardBox from '../template/AwardBox';
 import useRefresh from '../../hooks/useRefresh';
 import useGetDate from '../../hooks/useGetDate';
-import app from '../../../firebaseConfig';
+import { app } from '../../../firebaseConfig';
 
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';

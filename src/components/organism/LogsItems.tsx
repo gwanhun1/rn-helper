@@ -9,7 +9,7 @@ import ListItem from '../atoms/ListItem';
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
 import { get, getDatabase, ref } from 'firebase/database';
-import app from '../../../firebaseConfig';
+import { app } from '../../../firebaseConfig';
 
 type LogItem = {
   quest: string;

@@ -18,7 +18,7 @@ import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AllCenter from '../../atoms/AllCenter';
 import { get, getDatabase, push, ref, set } from 'firebase/database';
-import app from '../../../../firebaseConfig';
+import { app } from '../../../../firebaseConfig';
 import { useRecoilState } from 'recoil';
 import { PostContent, isUser } from '../../../recoil/Atom';
 

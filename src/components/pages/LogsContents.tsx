@@ -6,7 +6,7 @@ import SafeAreaViews from '../organism/SafeAreaViews';
 import useRefresh from '../../hooks/useRefresh';
 import { useRecoilState } from 'recoil';
 import { PostContent, isUser, login } from '../../recoil/Atom';
-import app from '../../../firebaseConfig';
+import { app } from '../../../firebaseConfig';
 import { get, getDatabase, ref } from 'firebase/database';
 
 const Container = styled(View)`

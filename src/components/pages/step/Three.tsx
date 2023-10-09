@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { PostContent, isUser } from '../../../recoil/Atom';
 import { getDatabase, ref, set } from 'firebase/database';
-import app from '../../../../firebaseConfig';
+import { app } from '../../../../firebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 
 const Container = styled(View)`

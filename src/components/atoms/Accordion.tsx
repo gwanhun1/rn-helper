@@ -9,11 +9,10 @@ const Container = styled(View)<{ width?: number }>`
   border-radius: 2px;
   width: 100%;
   border-radius: 10px;
-  /* background-color: #ffffff90; */
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   elevation: 3;
   width: ${(props) => (props.width ? `${props.width}%` : '100%')};
-`;
+` as React.ComponentType<{ width?: number }>;
 
 const Title = styled(Text)`
   font-size: 15px;

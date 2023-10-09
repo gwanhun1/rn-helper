@@ -15,12 +15,13 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { login } from './src/recoil/Atom';
 import { auth } from './firebaseConfig';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 export const BottomTabs = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
   const [isLogin, setIsLogin] = useRecoilState(login);
-
+  const navigation = useNavigation();
   useEffect(
     () =>
       auth.onAuthStateChanged((user) => {
@@ -89,7 +90,15 @@ export const BottomTabs = () => {
       })}
     >
       <Tab.Screen name="로그" component={Logs} />
-      <Tab.Screen name="조언" component={WorryStack} />
+      <Tab.Screen
+        name="조언"
+        component={WorryStack}
+        listeners={() => ({
+          tabPress: () => {
+            goToWorryHome();
+          },
+        })}
+      />
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="결제" component={Credit} />
       <Tab.Screen name="마이페이지" component={User} />

@@ -75,8 +75,6 @@ const Five = () => {
     }
   }, [user.uId]);
 
-  console.log(content);
-
   return (
     <View>
       <SafeAreaViewTitle

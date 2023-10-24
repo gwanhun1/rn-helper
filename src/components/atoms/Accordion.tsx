@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import styled from 'styled-components/native';
@@ -12,7 +12,7 @@ const Container = styled(View)<{ width?: number }>`
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   elevation: 3;
   width: ${(props) => (props.width ? `${props.width}%` : '100%')};
-` as React.ComponentType<{ width?: number }>;
+` as any;
 
 const Title = styled(Text)`
   font-size: 15px;

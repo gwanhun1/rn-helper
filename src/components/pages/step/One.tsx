@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from 'react-native';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { styled } from 'styled-components';
 import SafeAreaViewTitle from '../../organism/SafeAreaViewTitle';
 import Button from '../../atoms/Button';
@@ -22,10 +22,6 @@ const Box = styled(View)`
   padding: 5px;
 `;
 
-const FormBox = styled(View)`
-  margin-bottom: 200px;
-`;
-
 const One = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep2' });
   const [content, setContent] = useRecoilState(PostContent);
@@ -40,11 +36,11 @@ const One = () => {
   );
 
   return (
-    <FormBox>
+    <>
       <SafeAreaViewTitle
         title={`누구에게\n 듣고싶나요??`}
         color={'#50b196'}
-        size={50}
+        size={30}
       />
       <ScrollView>
         <Form>
@@ -224,7 +220,7 @@ const One = () => {
           </Box>
         </Form>
       </ScrollView>
-    </FormBox>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import TitleBoxName from '../molecules/TitleBoxName';
 
 const SafeAreaView = styled(SafeAreaViewDefault)`
   background-color: #50b196;
-  padding-bottom: 0px;
+  padding-bottom: 10px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 `;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Image, ImageSourcePropType, Text, View } from 'react-native';
 import Center from '../atoms/Center';
 import { styled } from 'styled-components';

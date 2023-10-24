@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Animated, View, Dimensions } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
 import { styled } from 'styled-components';
@@ -11,16 +11,16 @@ const WhoSe = () => {
 
   useEffect(() => {
     const animation = Animated.timing(scrollX, {
-      toValue: -imageWidth + screenWidth, // Set the image to go all the way
-      duration: 6000, // animation for 5 seconds
+      toValue: -imageWidth + screenWidth,
+      duration: 6000,
       useNativeDriver: false,
     });
 
     const loopAnimation = () => {
       Animated.sequence([
         Animated.timing(scrollX, {
-          toValue: 0, // go to the beginning of the image
-          duration: 0, // go straight for 0 seconds
+          toValue: 0,
+          duration: 0,
           useNativeDriver: false,
         }),
         animation,

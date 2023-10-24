@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Accordion from '../atoms/Accordion';
@@ -8,8 +8,6 @@ import Card from '../atoms/Card';
 import ListItem from '../atoms/ListItem';
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
-import { get, getDatabase, ref } from 'firebase/database';
-import { app } from '../../../firebaseConfig';
 
 type LogItem = {
   quest: string;
@@ -37,7 +35,7 @@ const LogsItems: React.FC<{ item: any }> = ({ item }) => {
       <Flex>
         <Accordion title={item.content} content={item.response} width={90} />
         <SubText ellipsizeMode="tail" numberOfLines={1}>
-          {item.date.slice(5, item.date.length)}
+          {item.date.slice(0, item.date.length)}
         </SubText>
       </Flex>
     </ListItem>

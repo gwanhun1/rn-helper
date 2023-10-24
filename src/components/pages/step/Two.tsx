@@ -7,10 +7,6 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { PostContent } from '../../../recoil/Atom';
 
-const FormBox = styled(View)`
-  margin-bottom: 200px;
-`;
-
 const Form = styled(View)`
   width: 100%;
   height: 80px;
@@ -42,11 +38,11 @@ const Two = () => {
   };
 
   return (
-    <FormBox>
+    <>
       <SafeAreaViewTitle
         title={`어떻게\n 듣고싶나요??`}
         color={'#50b196'}
-        size={50}
+        size={30}
       />
       <ScrollView>
         <Form>
@@ -226,7 +222,7 @@ const Two = () => {
           </Box>
         </Form>
       </ScrollView>
-    </FormBox>
+    </>
   );
 };
 

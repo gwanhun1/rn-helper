@@ -12,9 +12,15 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
-
+    "ios": {
+      "supportsTablet": true
+    },
     "android": {
-      "package": "com.gwanhun.worry"
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.gwanhun.helper"
     },
     "web": {
       "favicon": "./assets/favicon.png"

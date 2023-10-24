@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Flex } from '@react-native-material/core';
 
 const Center = ({ children }: CenterProps) => {

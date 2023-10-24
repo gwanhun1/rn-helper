@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 
 const View = styled(ViewDefault)<{ height?: number }>`
   height: ${(props) => (props.height ? `${props.height}px` : '50px')};
-`;
+` as any;
 
 const Blank = ({ height }: BlankProps) => {
   return <View height={height} />;

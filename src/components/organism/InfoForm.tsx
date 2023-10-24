@@ -163,11 +163,10 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
             <IdPw>{formData.id}</IdPw>
 
             <IdPw>
-              {
-                formData && user.password
-                // .split('')
-                // .map((char, index) => <PwCircle key={index} />)
-              }
+              {formData &&
+                user.password
+                  .split('')
+                  .map((char, index) => <PwCircle key={index} />)}
             </IdPw>
           </>
         )}

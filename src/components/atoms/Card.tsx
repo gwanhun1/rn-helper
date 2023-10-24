@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 

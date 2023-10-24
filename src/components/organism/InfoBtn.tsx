@@ -5,7 +5,7 @@ import { Alert, View } from 'react-native';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isUser, login } from '../../recoil/Atom';
 import { signOut } from 'firebase/auth';
-import app, { auth } from '../../../firebaseConfig';
+import { app, auth } from '../../../firebaseConfig';
 import { getDatabase, ref, set, update } from 'firebase/database';
 import { UserInfo } from '../pages/UserContents';
 

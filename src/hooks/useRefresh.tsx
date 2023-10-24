@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const useRefresh = () => {
   const [refreshing, setRefreshing] = useState(false);

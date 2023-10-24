@@ -1,34 +1,34 @@
 import React from 'react';
-import { styled } from 'styled-components';
-import { Text as TextDefault, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { Flex } from '@react-native-material/core';
 import Center from '../atoms/Center';
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
 
-const Title = styled(TextDefault)<{ color?: string; size?: number }>`
-  font-size: ${(props) => (props.size ? `${props.size}px` : '30px')};
-  margin-top: 10px;
-  font-weight: 900;
-  color: ${(props) => (props.color ? props.color : '#232D3D')};
-`;
-
-const Name = styled(TextDefault)<{ color?: string }>`
-  margin-top: 30px;
-  font-size: 15px;
-  color: ${(props) => (props.color ? props.color : '#232D3D')};
-  opacity: 0.9;
-`;
-const SubTitle = styled(TextDefault)<{ color?: string }>`
-  font-size: 10px;
-  color: ${(props) => (props.color ? props.color : '#232D3D')};
-  opacity: 0.9;
-`;
-const TextBox = styled(View)`
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-`;
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 30,
+    marginTop: 10,
+    fontWeight: '900',
+    color: '#232D3D',
+  },
+  name: {
+    marginTop: 30,
+    fontSize: 15,
+    color: '#232D3D',
+    opacity: 0.9,
+  },
+  subTitle: {
+    fontSize: 10,
+    color: '#232D3D',
+    opacity: 0.9,
+  },
+  textBox: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+});
 
 const TitleBoxName = ({ title, subTitle, color, size }: TitleBoxProps) => {
   const [user] = useRecoilState(isUser);
@@ -37,20 +37,21 @@ const TitleBoxName = ({ title, subTitle, color, size }: TitleBoxProps) => {
       <Flex justify="between" items="center" direction="row" w={'80%'}>
         {color ? (
           <>
-            <Title color={color} size={size}>
+            <Text style={[styles.title, { color, fontSize: size ? size : 30 }]}>
               {title}
-            </Title>
-            <TextBox>
-              <Name color={color}>
+            </Text>
+
+            <View style={styles.textBox}>
+              <Text style={[styles.name, { color }]}>
                 {user.username && `${user.username}님,`}
-              </Name>
-              <SubTitle color={color}>{subTitle}</SubTitle>
-            </TextBox>
+              </Text>
+              <Text style={[styles.subTitle, { color }]}>{subTitle}</Text>
+            </View>
           </>
         ) : (
           <>
-            <Title>{title}</Title>
-            <SubTitle>{subTitle}</SubTitle>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subTitle}>{subTitle}</Text>
           </>
         )}
       </Flex>

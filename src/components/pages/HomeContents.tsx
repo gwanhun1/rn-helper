@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SafeAreaViews from '../organism/SafeAreaViews';
 import Blank from '../atoms/BoxNope';
-import { RefreshControl, ScrollView } from 'react-native';
+import { FlatList, RefreshControl, ScrollView } from 'react-native';
 import AwardBox from '../template/AwardBox';
 import useRefresh from '../../hooks/useRefresh';
 import useGetDate from '../../hooks/useGetDate';
-import { app } from '../../../firebaseConfig';
 
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
@@ -25,7 +24,8 @@ const HomeContents = () => {
 
       <Blank height={20} />
 
-      <ScrollView
+      <FlatList
+        data={['주간', '월간', '좋아요']}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -34,11 +34,20 @@ const HomeContents = () => {
             colors={['#50b196']}
           />
         }
-      >
-        <AwardBox title="주간" subTitle={weekString} />
-        <AwardBox title="월간" subTitle={monthString} />
-        <AwardBox title="좋아요" subTitle="축하합니다" />
-      </ScrollView>
+        renderItem={({ item }) => (
+          <AwardBox
+            title={item}
+            subTitle={
+              item === '주간'
+                ? weekString
+                : item === '월간'
+                ? monthString
+                : '축하합니다'
+            }
+          />
+        )}
+        keyExtractor={(item) => item}
+      />
     </>
   );
 };

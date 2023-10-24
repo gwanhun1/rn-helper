@@ -1,7 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Animated, View, Dimensions } from 'react-native';
 import { styled } from 'styled-components';
-import HowImg from '../../../assets/how.svg';
 import { Path, Svg } from 'react-native-svg';
 
 const StyledAnimatedImage = styled(Animated.Image)`
@@ -13,11 +12,11 @@ const How = () => {
   const imageWidth = 3350;
   const screenWidth = Dimensions.get('window').width;
 
-  const scrollX = useRef(new Animated.Value(-imageWidth + screenWidth)).current; // Set the initial value to start from the left end of the image
+  const scrollX = useRef(new Animated.Value(-imageWidth + screenWidth)).current;
 
   useEffect(() => {
     const animation = Animated.timing(scrollX, {
-      toValue: 0, // Animate to the right to reveal the entire image
+      toValue: 0,
       duration: 10000,
       useNativeDriver: false,
     });
@@ -25,7 +24,7 @@ const How = () => {
     const loopAnimation = () => {
       Animated.sequence([
         Animated.timing(scrollX, {
-          toValue: -imageWidth + screenWidth, // Return to the initial position (left end)
+          toValue: -imageWidth + screenWidth,
           duration: 0,
           useNativeDriver: false,
         }),

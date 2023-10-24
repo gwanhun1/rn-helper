@@ -10,13 +10,13 @@ const TouchableOpacityBox = styled(TouchableOpacity)<{ bgColor?: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+` as any;
 
 const ButtonText = styled(Text)<{ color?: string; fontSize?: number }>`
   color: ${(props) => props.color || '#ffffff'};
   font-size: ${(props) => props.fontSize || 16}px;
   font-weight: bold;
-`;
+` as any;
 
 const Button = ({ text, color, fontSize, bgColor, onPress }: ButtonType) => {
   return (

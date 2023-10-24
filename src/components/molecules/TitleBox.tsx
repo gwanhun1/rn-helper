@@ -1,11 +1,11 @@
 import React from 'react';
-import { styled } from 'styled-components';
+import { styled } from 'styled-components/native';
 import { Text as TextDefault, View } from 'react-native';
 import { Flex } from '@react-native-material/core';
 import Center from '../atoms/Center';
+import { Dimensions } from 'react-native';
 
-const Title = styled(TextDefault)<{ color?: string; size?: number }>`
-  font-size: ${(props) => (props.size ? `${props.size}px` : '30px')};
+const Title = styled(TextDefault)<{ color?: string }>`
   margin-top: 10px;
   font-weight: 900;
   color: ${(props) => (props.color ? props.color : '#232D3D')};
@@ -29,7 +29,12 @@ const TitleBox = ({ title, subTitle, color, size }: TitleBoxProps) => {
       <Flex justify="between" items="center" direction="row" w={'80%'}>
         {color ? (
           <>
-            <Title color={color} size={size}>
+            <Title
+              color={color}
+              style={{
+                fontSize: Dimensions.get('window').width > 500 ? 30 : 25,
+              }}
+            >
               {title}
             </Title>
             <TextBox>

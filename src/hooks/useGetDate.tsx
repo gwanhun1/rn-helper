@@ -1,5 +1,3 @@
-import React from 'react';
-
 const useGetDate = () => {
   const currentDate: Date = new Date();
   const month: number = currentDate.getMonth() + 1;

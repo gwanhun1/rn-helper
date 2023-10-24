@@ -1,28 +1,30 @@
 module.exports = {
   extends: [
-    "airbnb",
-    "prettier",
-    "prettier/react",
-    "plugin:prettier/recommended",
-    "eslint-config-prettier",
+    'airbnb',
+    'prettier',
+    'prettier/react',
+    'plugin:prettier/recommended',
+    'eslint-config-prettier',
+    'eslint:recommended',
+    'plugin:prettier/recommended',
   ],
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   rules: {
-    "import/no-unresolved": "off",
-    "react/jsx-filename-extension": [
+    'import/no-unresolved': 'off',
+    'react/jsx-filename-extension': [
       1,
       {
-        extensions: [".js", ".jsx"],
+        extensions: ['.js', '.jsx'],
       },
     ],
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
-        trailingComma: "es5",
+        trailingComma: 'es5',
         singleQuote: true,
         printWidth: 100,
       },
     ],
   },
-  plugins: ["prettier"],
+  plugins: ['prettier'],
 };

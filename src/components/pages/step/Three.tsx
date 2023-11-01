@@ -16,6 +16,8 @@ import { useRecoilState } from 'recoil';
 import { PostContent, isUser } from '../../../recoil/Atom';
 import { useNavigation } from '@react-navigation/native';
 import Four from './Four';
+import { get, getDatabase, ref, update } from 'firebase/database';
+import { app } from '../../../../firebaseConfig';
 
 const Container = styled(View)`
   flex: 1;
@@ -54,20 +56,25 @@ const Boxes = styled(View)`
 const Three = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep5' });
   const [text, setText] = useState('');
-  const [user] = useRecoilState(isUser);
+  const [user, setUser] = useRecoilState(isUser);
   const navigation = useNavigation();
   const [apiCalled, setApiCalled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const db = getDatabase(app);
+  const dataUserRef = ref(db, `users/${user.uId}`);
 
   async function getBotResponse(userMessage) {
     if (!apiCalled) {
       setApiCalled(true);
       setIsLoading(true);
 
+      update(dataUserRef, { count: user.count - 1 }).then();
+
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
       const headers = {
         'Content-Type': 'application/json',
-        Authorization: `Bearer `,
+        Authorization: `Bearer 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`,
       };
       const data = {
         model: 'gpt-3.5-turbo',
@@ -104,7 +111,14 @@ const Three = () => {
   }
   const [content, setContent] = useRecoilState(PostContent);
   const handlePost = async () => {
-    getBotResponse(content.content);
+    if (user.count !== 0) {
+      getBotResponse(content.content);
+    } else if (user.count === 0) {
+      alert(
+        '오늘 하루 힘드셨나요?? 🥲 \n 추가 답변을 원하면 결제가 필요해요!!',
+      );
+      navigation.navigate('결제' as never);
+    }
   };
 
   useEffect(() => {
@@ -112,7 +126,6 @@ const Three = () => {
       MoveStep();
     }
   }, [content.response]);
-
   return (
     <>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

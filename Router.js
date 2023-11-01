@@ -3,6 +3,8 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Home from './src/pages/Home/index';
 import Logs from './src/pages/Logs/index';
 import Credit from './src/pages/Credit/index';
+import User from './src/pages/User/index';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -12,7 +14,6 @@ import Two from './src/components/pages/step/Two';
 import Three from './src/components/pages/step/Three';
 import Four from './src/components/pages/step/Four';
 import Five from './src/components/pages/step/Five';
-import User from './src/pages/User';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();

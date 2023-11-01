@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
 import { get, getDatabase, ref } from 'firebase/database';
 import { app } from '../../../firebaseConfig';
+import { useFocusEffect } from '@react-navigation/native';
 
 const AwardBox = ({ title, subTitle }: AwardBox) => {
   const [user] = useRecoilState(isUser);
@@ -30,15 +31,16 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
     } catch (error) {
       console.error('Error getting data from the database', error);
     } finally {
-      setRefreshing(false); // 새로고침 완료 후 refreshing 상태를 false로 변경
+      setRefreshing(false);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [user]);
-
-  const wait = (timeout: any) => {
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchData();
+    }, []),
+  );
+  const wait = (timeout: number) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
 
@@ -50,8 +52,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
   }, []);
 
   return (
-    <FlatList // FlatList로 변경합니다.
-      data={[{ key: 'title' }]} // 임시 데이터 배열을 사용하여 FlatList를 렌더링합니다.
+    <FlatList
+      data={[{ key: 'title' }]}
       renderItem={({ item }) => (
         <View>
           <Center>
@@ -71,7 +73,9 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[0].username
                     : title === '월간' && data[3] && data[3].username
                     ? data[3].username
-                    : title === '좋아요' && data[6] && data[6].username
+                    : title === '좋아요' &&
+                      data[data.length - 1] &&
+                      data[data.length - 1].username
                     ? data[6].username
                     : '') as string
                 }
@@ -80,8 +84,10 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[0].content
                     : title === '월간' && data[3] && data[3].content
                     ? data[3].content
-                    : title === '좋아요' && data[6] && data[6].content
-                    ? data[6].content
+                    : title === '좋아요' &&
+                      data[data.length - 1] &&
+                      data[data.length - 1].content
+                    ? data[data.length - 1].content
                     : '') as string
                 }
                 content={
@@ -89,8 +95,10 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[0].response
                     : title === '월간' && data[3] && data[3].response
                     ? data[3].response
-                    : title === '좋아요' && data[6] && data[6].response
-                    ? data[6].response
+                    : title === '좋아요' &&
+                      data[data.length - 1] &&
+                      data[data.length - 1].response
+                    ? data[data.length - 1].response
                     : '') as string
                 }
               />
@@ -102,8 +110,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[1].username
                     : title === '월간' && data[4]?.username
                     ? data[4].username
-                    : title === '좋아요' && data[7]?.username
-                    ? data[7].username
+                    : title === '좋아요' && data[data.length - 2]?.username
+                    ? data[data.length - 2].username
                     : '') as string
                 }
                 post={
@@ -111,8 +119,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[1].content
                     : title === '월간' && data[4]?.content
                     ? data[4].content
-                    : title === '좋아요' && data[7]?.content
-                    ? data[7].content
+                    : title === '좋아요' && data[data.length - 2]?.content
+                    ? data[data.length - 2].content
                     : '') as string
                 }
                 content={
@@ -120,8 +128,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[1].response
                     : title === '월간' && data[4]?.response
                     ? data[4].response
-                    : title === '좋아요' && data[7]?.response
-                    ? data[7].response
+                    : title === '좋아요' && data[data.length - 2]?.response
+                    ? data[data.length - 2].response
                     : '') as string
                 }
               />
@@ -132,8 +140,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[2].username
                     : title === '월간' && data[5]?.username
                     ? data[5].username
-                    : title === '좋아요' && data[8]?.username
-                    ? data[8].username
+                    : title === '좋아요' && data[data.length - 2]?.username
+                    ? data[data.length - 2].username
                     : '') as string
                 }
                 post={
@@ -141,8 +149,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[2].content
                     : title === '월간' && data[5]?.content
                     ? data[5].content
-                    : title === '좋아요' && data[8]?.content
-                    ? data[8].content
+                    : title === '좋아요' && data[data.length - 3]?.content
+                    ? data[data.length - 3].content
                     : '') as string
                 }
                 content={
@@ -150,8 +158,8 @@ const AwardBox = ({ title, subTitle }: AwardBox) => {
                     ? data[2].response
                     : title === '월간' && data[5]?.response
                     ? data[5].response
-                    : title === '좋아요' && data[8]?.response
-                    ? data[8].response
+                    : title === '좋아요' && data[data.length - 3]?.response
+                    ? data[data.length - 3].response
                     : '') as string
                 }
               />

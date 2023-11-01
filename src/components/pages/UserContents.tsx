@@ -25,11 +25,11 @@ const UserContents = () => {
       <SafeAreaView />
       <Center>
         <Container>
-          <InfoForm
+          {/* <InfoForm
             modify={modify}
             formData={formData}
             setFormData={setFormData}
-          />
+          /> */}
           <InfoBtn
             setModify={setModify}
             modify={modify}

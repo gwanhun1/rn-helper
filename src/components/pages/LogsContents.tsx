@@ -75,9 +75,7 @@ const LogsContents: React.FC = () => {
           <FlatListContent<any>
             data={data.filter((item) => item)}
             renderItem={renderItem}
-            keyExtractor={(item: any, index: { toString: () => any }) =>
-              index.toString()
-            }
+            keyExtractor={(index: { toString: () => any }) => index.toString()}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}

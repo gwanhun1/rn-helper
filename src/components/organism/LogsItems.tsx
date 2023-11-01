@@ -29,7 +29,7 @@ const SubText = styled(Text)`
   width: 50px;
 `;
 
-const LogsItems: React.FC<{ item: any }> = ({ item }) => {
+const LogsItems: React.FC<{ item: LogsItemsType }> = ({ item }) => {
   return (
     <ListItem>
       <Flex>
@@ -43,3 +43,9 @@ const LogsItems: React.FC<{ item: any }> = ({ item }) => {
 };
 
 export default LogsItems;
+
+interface LogsItemsType {
+  content: string;
+  response: string;
+  date: string;
+}

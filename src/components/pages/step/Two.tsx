@@ -32,7 +32,7 @@ const BigBox = styled(View)`
 const Two = () => {
   const { MoveStep, MoveBack } = UseNavigate({ to: 'WorryStep3' });
   const [content, setContent] = useRecoilState(PostContent);
-  const handlePost = async (what: any) => {
+  const handlePost = async (what: string) => {
     await setContent((prev) => ({ ...prev, twoStep: what }));
     await MoveStep();
   };

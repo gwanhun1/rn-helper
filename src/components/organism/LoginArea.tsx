@@ -29,8 +29,8 @@ const LoginArea = () => {
       <LogoBox>
         <Logo>HELPER</Logo>
       </LogoBox>
-
-      {isSignUp ? <SignupForm /> : <LoginForm />}
+      <LoginForm />
+      {/* {isSignUp ? <SignupForm /> : <LoginForm />} */}
     </Center>
   );
 };

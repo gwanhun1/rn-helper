@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AllCenter from '../../atoms/AllCenter';
-import { get, getDatabase, push, ref, set } from 'firebase/database';
+import { get, getDatabase, push, ref, set, update } from 'firebase/database';
 import { app } from '../../../../firebaseConfig';
 import { useRecoilState } from 'recoil';
 import { PostContent, isUser } from '../../../recoil/Atom';
@@ -36,14 +36,15 @@ const ShadowBox = styled(Shadow)`
 `;
 
 const Five = () => {
-  const [user] = useRecoilState(isUser);
+  const [user, setUser] = useRecoilState(isUser);
   const [content, setContent] = useRecoilState(PostContent);
-
   const db = getDatabase(app);
   const dataRef = ref(db, `logs/${user.uId}`);
+  const dataUserRef = ref(db, `users/${user.uId}`);
   const dataAllRef = ref(db, `contents`);
+  console.log(user);
   useEffect(() => {
-    if (user.uId && content.content && content.response) {
+    if (content.content && content.response) {
       get(dataRef)
         .then((snapshot) => {
           const newData = {
@@ -66,6 +67,18 @@ const Five = () => {
 
             push(dataAllRef, newData);
           }
+
+          get(dataUserRef)
+            .then((snapshot) => {
+              if (snapshot.exists()) {
+                const userData = snapshot.val();
+              } else {
+                console.log('No data available at the "users" location');
+              }
+            })
+            .catch((error) => {
+              console.error('Error getting data from the database', error);
+            });
         })
         .catch((error) => {
           console.error('Error getting data from the database', error);

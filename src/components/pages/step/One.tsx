@@ -5,7 +5,9 @@ import SafeAreaViewTitle from '../../organism/SafeAreaViewTitle';
 import Button from '../../atoms/Button';
 import UseNavigate from '../../../hooks/useNavigate';
 import { useRecoilState } from 'recoil';
-import { PostContent } from '../../../recoil/Atom';
+import { PostContent, isUser } from '../../../recoil/Atom';
+import { get, getDatabase, ref } from 'firebase/database';
+import { app } from '../../../../firebaseConfig';
 
 const Form = styled(View)`
   width: 100%;
@@ -34,6 +36,24 @@ const One = () => {
     () => setContent({ oneStep: '', twoStep: '', content: '', response: '' }),
     [],
   );
+  const [user, setUser] = useRecoilState(isUser);
+
+  useEffect(() => {
+    const db = getDatabase(app);
+    const dataRef = ref(db, `users/${user.uId}`);
+    get(dataRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          setUser((prev) => ({ ...prev, count: userData.count }));
+        } else {
+          console.log('No data available at the "users" location');
+        }
+      })
+      .catch((error) => {
+        console.error('Error getting data from the database', error);
+      });
+  }, []);
 
   return (
     <>

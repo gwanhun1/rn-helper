@@ -92,7 +92,7 @@ const NoneUsername = styled(Text)`
 const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
   const [user, setUser] = useRecoilState<any>(isUser);
   const handleChange = (name: string, value: string) => {
-    setFormData((prevFormData: any) => ({
+    setFormData((prevFormData: UserInfo) => ({
       ...prevFormData,
       [name]: value,
     }));
@@ -105,6 +105,7 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
+
           setFormData({
             username: userData.username,
             id: userData.id,
@@ -163,7 +164,8 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
             <IdPw>{formData.id}</IdPw>
 
             <IdPw>
-              {formData &&
+              {user &&
+                typeof user.password === 'string' &&
                 user.password
                   .split('')
                   .map((char, index) => <PwCircle key={index} />)}
@@ -180,5 +182,5 @@ export default InfoForm;
 type InfoFormProps = {
   modify: boolean;
   formData: UserInfo;
-  setFormData: any;
+  setFormData: React.Dispatch<React.SetStateAction<UserInfo>>;
 };

@@ -26,12 +26,7 @@ const Box = styled(View)`
   padding: 5px;
 `;
 
-const InfoBtn = ({
-  setModify,
-  setFormData,
-  formData,
-  modify,
-}: InfoBtnProps) => {
+const InfoBtn = ({ setModify, formData, modify }: InfoBtnProps) => {
   const [user, setUser] = useRecoilState<any>(isUser);
 
   const handleModify = () => {
@@ -60,7 +55,7 @@ const InfoBtn = ({
                   setModify((prev) => !prev);
                   console.log('Data successfully written to the database');
                 })
-                .catch((error: any) => {
+                .catch((error) => {
                   console.error('Error writing data to the database', error);
                 });
             },
@@ -142,7 +137,6 @@ export default InfoBtn;
 
 type InfoBtnProps = {
   setModify: React.Dispatch<React.SetStateAction<boolean>>;
-  setFormData: any;
   formData: UserInfo;
   modify: boolean;
 };

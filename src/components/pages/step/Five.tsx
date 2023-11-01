@@ -42,7 +42,7 @@ const Five = () => {
   const dataRef = ref(db, `logs/${user.uId}`);
   const dataUserRef = ref(db, `users/${user.uId}`);
   const dataAllRef = ref(db, `contents`);
-  console.log(user);
+
   useEffect(() => {
     if (content.content && content.response) {
       get(dataRef)

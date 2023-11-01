@@ -9,12 +9,6 @@ import ListItem from '../atoms/ListItem';
 import { useRecoilState } from 'recoil';
 import { isUser } from '../../recoil/Atom';
 
-type LogItem = {
-  quest: string;
-  date: string;
-  response: string;
-};
-
 const Flex = styled(FlexDefault)`
   flex-direction: row;
   justify-content: space-between;
@@ -45,7 +39,7 @@ const LogsItems: React.FC<{ item: LogsItemsType }> = ({ item }) => {
 export default LogsItems;
 
 interface LogsItemsType {
-  content: string;
-  response: string;
+  content?: string;
+  response?: string;
   date: string;
 }

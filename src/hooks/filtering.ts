@@ -17,6 +17,9 @@ export function hasBadWords(text) {
 
 const badWords = [
   '시이이발',
+  '애미',
+  '애비',
+  '년',
   '개새끼',
   '등신',
   '련아',

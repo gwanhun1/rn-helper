@@ -30,12 +30,7 @@ const UserContents = () => {
             formData={formData}
             setFormData={setFormData}
           /> */}
-          <InfoBtn
-            setModify={setModify}
-            modify={modify}
-            formData={formData}
-            setFormData={setFormData}
-          />
+          <InfoBtn setModify={setModify} modify={modify} formData={formData} />
           <UserDescription />
         </Container>
       </Center>

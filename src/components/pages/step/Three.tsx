@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import Four from './Four';
 import { get, getDatabase, ref, update } from 'firebase/database';
 import { app } from '../../../../firebaseConfig';
+import { hasBadWords } from '../../../hooks/filtering';
 
 const Container = styled(View)`
   flex: 1;
@@ -65,7 +66,7 @@ const Three = () => {
   const dataUserRef = ref(db, `users/${user.uId}`);
 
   async function getBotResponse(userMessage) {
-    if (!apiCalled) {
+    if (!apiCalled && hasBadWords(userMessage)) {
       setApiCalled(true);
       setIsLoading(true);
 

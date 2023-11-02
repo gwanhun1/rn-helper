@@ -15,6 +15,7 @@
     "@react-navigation/material-bottom-tabs": "^6.2.17",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.14",
+    "badwords-ko": "^1.0.4",
     "expo": "~49.0.13",
     "expo-status-bar": "~1.6.0",
     "firebase": "^10.5.0",

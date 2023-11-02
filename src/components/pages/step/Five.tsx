@@ -21,6 +21,7 @@ import { get, getDatabase, push, ref, set, update } from 'firebase/database';
 import { app } from '../../../../firebaseConfig';
 import { useRecoilState } from 'recoil';
 import { PostContent, isUser } from '../../../recoil/Atom';
+import { hasBadWords } from '../../../hooks/filtering';
 
 const Final = styled(View)`
   height: 100%;
@@ -44,14 +45,14 @@ const Five = () => {
   const dataAllRef = ref(db, `contents`);
 
   useEffect(() => {
-    if (content.content && content.response) {
+    if (content.content && content.response && hasBadWords(content.content)) {
       get(dataRef)
         .then((snapshot) => {
           const newData = {
             content: content.content,
             response: content.response,
             date: new Date().toLocaleDateString(),
-            username: user.username ? user.username : 'username',
+            username: user.username ? user.username : '별명이 없습니다.',
           };
 
           if (snapshot.exists()) {

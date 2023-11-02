@@ -3,7 +3,7 @@
 <img
     src="https://github.com/gwanhun1/mini/assets/110619143/525d92f9-7248-4a34-9739-7c9e9fb2b36f"
     width="100%"
-    height="200"
+    height="250"
   /> </center>
 
 <h1> 고민지우개 </h1>

@@ -1,4 +1,10 @@
-![Don’t worry • Don’t worry • Don’t worry](https://github.com/gwanhun1/rn-helper/assets/110619143/c513e533-dfc4-4d5e-b92b-ae5270b40c29)
+<center>
+
+<img
+    src="https://github.com/gwanhun1/mini/assets/110619143/525d92f9-7248-4a34-9739-7c9e9fb2b36f"
+    width="100%"
+    height="200"
+  /> </center>
 
 <h1> 고민지우개 </h1>
 

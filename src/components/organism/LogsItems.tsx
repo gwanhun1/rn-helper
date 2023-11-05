@@ -29,7 +29,7 @@ const LogsItems: React.FC<{ item: LogsItemsType }> = ({ item }) => {
       <Flex>
         <Accordion title={item.content} content={item.response} width={90} />
         <SubText ellipsizeMode="tail" numberOfLines={1}>
-          {item.date.slice(0, item.date.length)}
+          {/* {item.date.slice(0, item.date.length)} */}
         </SubText>
       </Flex>
     </ListItem>

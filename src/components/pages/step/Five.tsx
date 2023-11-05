@@ -46,7 +46,7 @@ const Five = () => {
 
   useEffect(() => {
     if (content.content && content.response && hasBadWords(content.content)) {
-      get(dataRef)
+      get(dataUserRef)
         .then((snapshot) => {
           const newData = {
             content: content.content,

@@ -82,7 +82,7 @@ const Three = () => {
         messages: [
           {
             role: 'system',
-            content: `you are a ${content.oneStep} and answer for me with ${content.twoStep}. Please provide a short response.`,
+            content: `you are a ${content.oneStep} and Underpin for me with ${content.twoStep}. Please provide a short response.`,
           },
           {
             role: 'user',
@@ -105,6 +105,7 @@ const Three = () => {
         });
       } catch (error) {
         console.error('Error:', error);
+        alert('gpt가 아파요 🥲\n 잠시후에 다시 해주세요!!');
       }
 
       setIsLoading(false);

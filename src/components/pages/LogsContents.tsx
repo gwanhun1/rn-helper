@@ -35,6 +35,7 @@ const LogsContents: React.FC = () => {
   const db = getDatabase(app);
   const dataRef = ref(db, `logs/${user.uId}`);
   const [content, setContent] = useRecoilState(PostContent);
+  console.log(data[0]);
 
   useEffect(() => {
     if (isLogin) {
@@ -71,9 +72,9 @@ const LogsContents: React.FC = () => {
         color={'white'}
       />
       <Container>
-        {data.length > 0 ? (
+        {data[0].length > 0 ? (
           <FlatListContent<any>
-            data={data.filter((item) => item)}
+            data={data[0].filter((item) => item)}
             renderItem={renderItem}
             keyExtractor={(index: { toString: () => any }) => index.toString()}
             refreshControl={

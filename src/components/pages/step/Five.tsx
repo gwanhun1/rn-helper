@@ -45,49 +45,49 @@ const Five = () => {
   const dataAllRef = ref(db, `contents`);
 
   useEffect(() => {
-    if (content.content && content.response && hasBadWords(content.content)) {
-      get(dataUserRef)
-        .then((snapshot) => {
-          const newData = {
-            content: content.content,
-            response: content.response,
-            date: new Date().toLocaleDateString(),
-            username: user.username ? user.username : '별명이 없습니다.',
-          };
+    if (
+      user.uId &&
+      content.content &&
+      content.response &&
+      hasBadWords(content.content)
+    ) {
+      const newData = {
+        content: content.content,
+        response: content.response,
+        date: new Date().toLocaleDateString(),
+        username: user.username ? user.username : '별명이 없습니다.',
+      };
 
-          if (snapshot.exists()) {
-            const existingData = snapshot.val();
+      const dataRefPromise = get(dataRef);
+      const dataUserRefPromise = get(dataUserRef);
+
+      Promise.all([dataRefPromise, dataUserRefPromise])
+        .then(([dataRefSnapshot, dataUserRefSnapshot]) => {
+          if (dataRefSnapshot.exists()) {
+            const existingData = dataRefSnapshot.val();
             const dataArray = Object.values(existingData);
             const newKey = push(dataRef, newData).key;
             dataArray.push({ ...newData, id: newKey });
-
             set(dataRef, dataArray);
-            push(dataAllRef, newData);
           } else {
             set(dataRef, [newData]);
-
-            push(dataAllRef, newData);
           }
 
-          get(dataUserRef)
-            .then((snapshot) => {
-              if (snapshot.exists()) {
-                const userData = snapshot.val();
-              } else {
-                console.log('No data available at the "users" location');
-              }
-            })
-            .catch((error) => {
-              console.error('Error getting data from the database', error);
-            });
+          if (dataUserRefSnapshot.exists()) {
+            const userData = dataUserRefSnapshot.val();
+          } else {
+            console.log('No data available at the "users" location');
+          }
+
+          push(dataAllRef, newData);
         })
         .catch((error) => {
-          console.error('Error getting data from the database', error);
+          console.error('Error while interacting with the database', error);
         });
     } else {
       console.log('error');
     }
-  }, [user.uId]);
+  }, []);
 
   return (
     <View>

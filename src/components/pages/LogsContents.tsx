@@ -35,7 +35,6 @@ const LogsContents: React.FC = () => {
   const db = getDatabase(app);
   const dataRef = ref(db, `logs/${user.uId}`);
   const [content, setContent] = useRecoilState(PostContent);
-  console.log(data[0]);
 
   useEffect(() => {
     if (isLogin) {
@@ -63,6 +62,8 @@ const LogsContents: React.FC = () => {
   };
 
   const [isLogin] = useRecoilState(login);
+  console.log('------------------');
+  console.log(data);
 
   return (
     <>
@@ -72,7 +73,7 @@ const LogsContents: React.FC = () => {
         color={'white'}
       />
       <Container>
-        {data[0].length > 0 ? (
+        {/* {data[0].length > 0 ? (
           <FlatListContent<any>
             data={data[0].filter((item) => item)}
             renderItem={renderItem}
@@ -88,7 +89,7 @@ const LogsContents: React.FC = () => {
           />
         ) : (
           <EmptyText>텅...</EmptyText>
-        )}
+        )} */}
       </Container>
     </>
   );

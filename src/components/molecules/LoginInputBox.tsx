@@ -131,13 +131,13 @@ const LoginInputBox = () => {
         id: userName,
         grade: '',
       });
-      await SaveInfo(Number(userId));
+      SaveInfo(userId);
     } catch (e) {
       console.error('Login error:', e);
       alert('로그인 정보를 다시 입력해주세요.');
     }
   };
-  const SaveInfo = (userId: number) => {
+  const SaveInfo = (userId: any) => {
     const db = getDatabase(app);
     const dataRef = ref(db, `users/${userId}`);
 

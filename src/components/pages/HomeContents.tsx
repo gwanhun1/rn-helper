@@ -13,6 +13,7 @@ const HomeContents = () => {
   const { refreshing, onRefresh } = useRefresh();
   const { monthString, weekString } = useGetDate();
   const [user] = useRecoilState(isUser);
+
   return (
     <>
       <SafeAreaViews

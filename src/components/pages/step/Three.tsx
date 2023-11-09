@@ -75,7 +75,7 @@ const Three = () => {
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
       const headers = {
         'Content-Type': 'application/json',
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer 메롱`,
       };
       const data = {
         model: 'gpt-3.5-turbo',

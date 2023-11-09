@@ -80,7 +80,6 @@ const IdPwBox = styled(View)`
 const PwCircle = styled(View)`
   width: 10px;
   height: 10px;
-  border-radius: 50%;
   background-color: gray;
 `;
 
@@ -120,10 +119,11 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
         console.error('Error getting data from the database', error);
       });
   }, [user]);
-
+  console.log(modify);
   return (
     <FlexBox>
       <FontAwesome name="user-circle" size={120} color="gray" />
+
       <TextBox>
         <UsernameBox>
           {modify ? (
@@ -168,7 +168,9 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
                 typeof user.password === 'string' &&
                 user.password
                   .split('')
-                  .map((char, index) => <PwCircle key={index} />)}
+                  .map((char, index) => (
+                    <PwCircle key={index} style={{ borderRadius: 20 }} />
+                  ))}
             </IdPw>
           </>
         )}

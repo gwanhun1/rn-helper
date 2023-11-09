@@ -5,9 +5,7 @@ import { styled } from 'styled-components';
 
 const BadgeBorder = styled(Flex)<{ color?: string }>`
   border: 1px solid ${(props) => props.color || '#50b196'};
-  padding: 3px 5px;
-  margin: 3px;
-  border-radius: 40%;
+  padding: 3px 3px 4px 3px;
 `;
 
 const BadgeText = styled(Text)<{ color?: string; fontSize?: number }>`
@@ -17,7 +15,12 @@ const BadgeText = styled(Text)<{ color?: string; fontSize?: number }>`
 
 const Badge = ({ color, fontSize, children }: BadgeProps) => {
   return (
-    <BadgeBorder justify="center" items="center" color={color}>
+    <BadgeBorder
+      justify="center"
+      items="center"
+      color={color}
+      style={{ borderRadius: 10 }}
+    >
       <BadgeText fontSize={fontSize} color={color}>
         {children}
       </BadgeText>

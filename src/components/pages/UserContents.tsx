@@ -9,6 +9,7 @@ import UserDescription from '../organism/UserDescription';
 
 const Container = styled(View)`
   width: 90%;
+  margin-top: 20px;
 `;
 
 const UserContents = () => {
@@ -25,11 +26,11 @@ const UserContents = () => {
       <SafeAreaView />
       <Center>
         <Container>
-          {/* <InfoForm
+          <InfoForm
             modify={modify}
             formData={formData}
             setFormData={setFormData}
-          /> */}
+          />
           <InfoBtn setModify={setModify} modify={modify} formData={formData} />
           <UserDescription />
         </Container>

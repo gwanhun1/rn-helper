@@ -57,13 +57,14 @@ const LogsContents: React.FC = () => {
     }
   }, [user, refreshing, content.content]);
 
-  const renderItem: React.FC<{ item: LogItem }> = ({ item }) => {
-    return <LogsItems item={item} />;
+  const renderItem: React.FC<{ item: LogItem; index: number }> = ({
+    item,
+    index,
+  }) => {
+    return <LogsItems item={item} key={index} />;
   };
 
   const [isLogin] = useRecoilState(login);
-  console.log('------------------');
-  console.log(data);
 
   return (
     <>
@@ -73,9 +74,9 @@ const LogsContents: React.FC = () => {
         color={'white'}
       />
       <Container>
-        {/* {data[0].length > 0 ? (
+        {data && data.length > 0 ? (
           <FlatListContent<any>
-            data={data[0].filter((item) => item)}
+            data={data.filter((item) => item)}
             renderItem={renderItem}
             keyExtractor={(index: { toString: () => any }) => index.toString()}
             refreshControl={
@@ -89,7 +90,7 @@ const LogsContents: React.FC = () => {
           />
         ) : (
           <EmptyText>텅...</EmptyText>
-        )} */}
+        )}
       </Container>
     </>
   );

@@ -23,8 +23,6 @@ const IDInput = styled(TextInput)`
   height: 54px;
   padding: 10px;
   border: 1px solid lightgray;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
   background-color: #fff;
 `;
 
@@ -33,8 +31,6 @@ const PWInput = styled(TextInput)`
   height: 54px;
   padding: 10px;
   border: 1px solid lightgray;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   background-color: #fff;
 `;
 

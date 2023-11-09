@@ -75,7 +75,7 @@ const Three = () => {
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
       const headers = {
         'Content-Type': 'application/json',
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer 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`,
       };
       const data = {
         model: 'gpt-3.5-turbo',
@@ -135,7 +135,7 @@ const Three = () => {
           <SafeAreaViewTitle
             title={`고민이 무엇인가요??`}
             color={'#50b196'}
-            size={30}
+            size={40}
           />
           <KeyboardAvoidingContainer
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

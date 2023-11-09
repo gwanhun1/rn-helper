@@ -6,13 +6,13 @@ import TitleBox from '../molecules/TitleBox';
 
 const SafeAreaView = styled(SafeAreaViewDefault)<{ fontSize?: number }>`
   padding-bottom: 30px;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
 `;
 
 const SafeAreaViewTitle = ({ title, color, size }: SafeAreaViewTitleProps) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{ borderBottomLeftRadius: 30, borderBottomRightRadius: 30 }}
+    >
       <Center>
         <TitleBox title={title} color={color} size={size} />
       </Center>

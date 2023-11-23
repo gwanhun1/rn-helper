@@ -5,8 +5,10 @@ import {
   browserLocalPersistence,
 } from 'firebase/auth';
 
+import { API_KEY } from '@env';
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyAWhL-vj_UEyk2mAxrhTmQcM2c596rPY_M',
+  apiKey: API_KEY,
   authDomain: 'helper-8a110.firebaseapp.com',
   databaseURL:
     'https://helper-8a110-default-rtdb.asia-southeast1.firebasedatabase.app',

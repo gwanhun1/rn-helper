@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import React from 'react';
 import Center from '../atoms/Center';
 import { styled } from 'styled-components';
@@ -19,7 +19,6 @@ const IconText = styled(Text)`
   color: #9a9191;
 `;
 const RoundIcon = styled(View)`
-  border-radius: 50%;
   overflow: hidden;
 `;
 
@@ -31,7 +30,9 @@ const LoginIcon = () => {
       </IconTextBox>
 
       <IconBox>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => Alert.alert('다음 버전을 기다려주세요 🥹')}
+        >
           {/* <Google viewBox="0 0 450 600" width={50} height={50}/> */}
 
           <Svg width="40px" height="40px" viewBox="0 0 32 32" fill="none">
@@ -53,8 +54,10 @@ const LoginIcon = () => {
             />
           </Svg>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <RoundIcon>
+        <TouchableOpacity
+          onPress={() => Alert.alert('다음 버전을 기다려주세요 🥹')}
+        >
+          <RoundIcon style={{ borderRadius: 50 }}>
             <Svg width="45px" height="45px" viewBox="0 0 256 256">
               <Path
                 fill="#FFE812"
@@ -68,7 +71,9 @@ const LoginIcon = () => {
             </Svg>
           </RoundIcon>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => Alert.alert('다음 버전을 기다려주세요 🥹')}
+        >
           <Svg fill="#000000" width="50px" height="50px" viewBox="-6.5 0 32 32">
             <Path d="M13.313 7.219c0.25-0.688 0.406-1.281 0.406-1.844 0-0.094-0.031-0.156-0.031-0.25s-0.031-0.219-0.063-0.344c-1.563 0.344-2.656 1.031-3.344 2.031-0.688 0.969-1.031 2.125-1.063 3.469 0.563-0.063 1.031-0.156 1.375-0.25 0.469-0.156 0.969-0.469 1.469-0.938 0.563-0.563 1-1.25 1.25-1.875zM11.531 10.344c-0.938 0.313-1.594 0.438-1.938 0.438-0.281 0-0.875-0.125-1.844-0.375-0.938-0.281-1.719-0.438-2.406-0.438-1.531 0-2.813 0.656-3.844 1.969-1 1.313-1.5 2.969-1.5 5.031 0 2.219 0.656 4.469 1.969 6.781 1.344 2.313 2.719 3.438 4.063 3.438 0.438 0 1-0.156 1.781-0.438 0.719-0.281 1.344-0.438 1.906-0.438s1.25 0.125 2.031 0.406c0.813 0.281 1.438 0.406 1.906 0.406 1.156 0 2.313-0.875 3.469-2.594 0.375-0.563 0.719-1.156 1-1.719 0.25-0.531 0.469-1.094 0.656-1.625-0.844-0.25-1.563-0.844-2.156-1.719-0.594-0.906-0.906-1.906-0.906-3 0-1.031 0.281-1.938 0.844-2.781 0.344-0.438 0.875-1 1.563-1.594-0.219-0.281-0.469-0.563-0.688-0.781-0.25-0.219-0.469-0.406-0.688-0.563-0.875-0.563-1.844-0.875-2.906-0.875-0.625 0-1.406 0.188-2.313 0.469z"></Path>
           </Svg>

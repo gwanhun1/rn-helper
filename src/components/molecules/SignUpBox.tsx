@@ -30,7 +30,7 @@ const SignUpButtonText = styled(Text)`
 `;
 
 const SignUpBox = () => {
-  const [, setIsSignUp] = useRecoilState(signUp);
+  const [isSignUp, setIsSignUp] = useRecoilState(signUp);
 
   const handleSignMode = () => {
     setIsSignUp((prev) => !prev);
@@ -39,7 +39,9 @@ const SignUpBox = () => {
   return (
     <SignUp>
       <SignUpButton onPress={handleSignMode}>
-        <SignUpButtonText>10초만에 간단하게 회원가입</SignUpButtonText>
+        <SignUpButtonText>
+          {!isSignUp ? '10초만에 간단하게 회원가입' : '로그인 하러가기'}
+        </SignUpButtonText>
       </SignUpButton>
     </SignUp>
   );

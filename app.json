@@ -2,7 +2,7 @@
   "expo": {
     "name": "고민지우개",
     "slug": "helper",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,14 +21,14 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.gwanhun.helper",
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "4d1d3ca3-12fc-476b-822e-38e0fa598d19"
+        "projectId": "3f908242-20c7-43f3-817d-d44aa6942feb"
       }
     }
   }

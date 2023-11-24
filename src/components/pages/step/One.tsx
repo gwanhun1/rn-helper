@@ -58,9 +58,9 @@ const One = () => {
   return (
     <>
       <SafeAreaViewTitle
-        title={`누구에게\n 듣고싶나요??`}
+        title={`누구에게 듣고싶나요??`}
         color={'#50b196'}
-        size={30}
+        size={25}
       />
       <ScrollView>
         <Form>

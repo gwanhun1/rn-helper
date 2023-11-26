@@ -19,7 +19,7 @@ import Four from './Four';
 import { get, getDatabase, ref, update } from 'firebase/database';
 import { app } from '../../../../firebaseConfig';
 import { hasBadWords } from '../../../hooks/filtering';
-import { KEY } from '@env';
+import { GPTKEY } from '@env';
 
 const Container = styled(View)`
   flex: 1;
@@ -67,7 +67,7 @@ const Three = () => {
   const dataUserRef = ref(db, `users/${user.uId}`);
 
   async function getBotResponse(userMessage) {
-    if (!apiCalled && hasBadWords(userMessage) && KEY) {
+    if (!apiCalled && hasBadWords(userMessage) && GPTKEY) {
       setApiCalled(true);
       setIsLoading(true);
 
@@ -76,7 +76,7 @@ const Three = () => {
       const apiUrl = 'https://api.openai.com/v1/chat/completions';
       const headers = {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${KEY}`,
+        Authorization: `Bearer ${GPTKEY}`,
       };
       const data = {
         model: 'gpt-3.5-turbo',

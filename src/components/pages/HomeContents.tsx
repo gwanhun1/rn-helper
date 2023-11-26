@@ -25,7 +25,7 @@ const HomeContents = () => {
       <Blank height={20} />
 
       <FlatList
-        data={['주간', '월간', '좋아요']}
+        data={['좋아요', '주간', '월간']}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}

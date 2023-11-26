@@ -119,7 +119,6 @@ const InfoForm = ({ modify, formData, setFormData }: InfoFormProps) => {
         console.error('Error getting data from the database', error);
       });
   }, [user]);
-  console.log(modify);
   return (
     <FlexBox>
       <FontAwesome name="user-circle" size={120} color="gray" />
